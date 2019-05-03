@@ -1,6 +1,5 @@
 ﻿namespace Synker.Persistence.Configurations
 {
-    using CryptoHelper;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using Synker.Domain.Entities;
 
@@ -12,7 +11,6 @@
             {
                 auth.Property(x => x.User).IsRequired().HasMaxLength(255);
                 auth.Property(x => x.Password)
-                .HasConversion(password => Crypto.HashPassword(password), p => p)
                 .HasMaxLength(255);
             });
 
