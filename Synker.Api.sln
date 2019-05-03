@@ -27,11 +27,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{752E94DB-167E-4B0B-ADB7-6EFA4DAC3B08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synker.Persistence", "Synker.Persistence\Synker.Persistence.csproj", "{51807197-3A3E-4713-A458-AA7FEE90C7F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synker.Persistence", "Synker.Persistence\Synker.Persistence.csproj", "{51807197-3A3E-4713-A458-AA7FEE90C7F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synker.Infrastructure", "Synker.Infrastructure\Synker.Infrastructure.csproj", "{5FDCA489-2A7C-43A2-A1E5-637DB5C2F985}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synker.Infrastructure", "Synker.Infrastructure\Synker.Infrastructure.csproj", "{5FDCA489-2A7C-43A2-A1E5-637DB5C2F985}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synker.Domain.Tests", "Synker.Domain.Tests\Synker.Domain.Tests.csproj", "{F731AD9B-D7C8-458C-9990-D9A5126049ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synker.Domain.Tests", "Synker.Domain.Tests\Synker.Domain.Tests.csproj", "{F731AD9B-D7C8-458C-9990-D9A5126049ED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{21949F1B-8569-4639-ADC7-95A90077AC51}"
+	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

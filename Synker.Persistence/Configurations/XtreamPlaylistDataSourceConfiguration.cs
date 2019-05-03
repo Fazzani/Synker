@@ -1,5 +1,6 @@
 ﻿namespace Synker.Persistence.Configurations
 {
+    using CryptoHelper;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using Synker.Domain.Entities;
 
@@ -10,10 +11,13 @@
             builder.OwnsOne(x => x.Authentication, auth =>
             {
                 auth.Property(x => x.User).IsRequired().HasMaxLength(255);
-                auth.Property(x => x.Password).HasMaxLength(255);
+                auth.Property(x => x.Password)
+                .HasConversion(password => Crypto.HashPassword(password), p => p)
+                .HasMaxLength(255);
             });
 
-            builder.OwnsOne(x => x.Server, uri => {
+            builder.OwnsOne(x => x.Server, uri =>
+            {
                 uri.Property(x => x.Url).IsRequired();
                 uri.Ignore(x => x.Uri);
             });
