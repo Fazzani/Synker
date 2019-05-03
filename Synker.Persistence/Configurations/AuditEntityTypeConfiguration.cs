@@ -5,13 +5,13 @@
     using Synker.Domain.Entities.Core;
     public class AuditEntityTypeConfiguration<TEntity> : IEntityTypeConfiguration<TEntity> where TEntity : EntityAudit
     {
-        public void Configure(EntityTypeBuilder<TEntity> builder)
+        public virtual void Configure(EntityTypeBuilder<TEntity> builder)
         {
             builder.Property(x => x.CreatedDate)
-                .HasDefaultValueSql("DateTime(Kind=UTC,Unspecified)");
+                .HasDefaultValueSql("transaction_timestamp()");
 
             builder.Property(x => x.UpdatedDate)
-                .HasDefaultValueSql("DateTime(Kind=UTC,Unspecified)");
+                .HasDefaultValueSql("transaction_timestamp()");
         }
     }
 }

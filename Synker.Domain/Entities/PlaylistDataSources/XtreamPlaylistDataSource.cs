@@ -10,6 +10,7 @@
         }
 
         public UriAddress Server { get; set; }
+
         public BasicAuthentication Authentication { get; set; } //TODO: Gérer tt type d'authentification
     }
 }

@@ -5,7 +5,7 @@
     using Synker.Domain.Entities;
     public class PlaylistConfiguration : AuditEntityTypeConfiguration<Playlist>
     {
-        public void Configure(EntityTypeBuilder<Playlist> builder)
+        public override void Configure(EntityTypeBuilder<Playlist> builder)
         {
             base.Configure(builder);
 
@@ -19,6 +19,7 @@
                 .HasMaxLength(255)
                 .IsRequired();
 
+            builder.HasIndex(x => x.Name);
         }
     }
 }

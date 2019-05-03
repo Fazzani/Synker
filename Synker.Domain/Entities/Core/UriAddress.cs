@@ -11,6 +11,12 @@
         {
         }
 
+        public string Url
+        {
+            get { return Uri?.AbsoluteUri; }
+           private set { Uri = new Uri(value); }
+        }
+
         public static UriAddress For(string url)
         {
             var uriAddress = new UriAddress();
@@ -27,7 +33,7 @@
             return uriAddress;
         }
 
-        public Uri Uri { get; set; }
+        public Uri Uri { get; private set; }
 
         protected override IEnumerable<object> GetAtomicValues()
         {
@@ -41,6 +47,6 @@
             return Uri.ToString().CompareTo(other.Uri.ToString());
         }
 
-        public override string ToString() => Uri.ToString();
+        public override string ToString() => Url;
     }
 }

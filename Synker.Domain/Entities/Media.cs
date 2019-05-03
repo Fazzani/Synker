@@ -22,9 +22,7 @@
 
         public Playlist Playlist { get; set; }
 
-        public PlaylistDataSource PlaylistDataSource { get; set; }
-
-        public ICollection<Label> Labels { get; }
+        public ICollection<Label> Labels { get; private set; }
 
         #region Interfaces implementations
 
@@ -95,7 +93,7 @@
         /// avoid duplicated
         /// avoid null key 
         /// </summary>
-        public void AddNewAttribute(Label label)
+        public void AddNewLabel(Label label)
         {
             if (string.IsNullOrEmpty(label.Key))
             {

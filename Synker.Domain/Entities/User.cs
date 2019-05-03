@@ -12,6 +12,8 @@
             Playlists = new HashSet<Playlist>();
         }
 
+        public string Email { get; set; }
+
         public ICollection<PlaylistDataSource> PlaylistDataSources { get; }
         public ICollection<Playlist> Playlists { get; }
     }

@@ -7,10 +7,8 @@
 
     public class PlaylistDataSourceConfiguration<TEntity> : AuditEntityTypeConfiguration<TEntity> where TEntity : PlaylistDataSource
     {
-        public void Configure(EntityTypeBuilder<TEntity> builder)
+        public override void Configure(EntityTypeBuilder<TEntity> builder)
         {
-            base.Configure(builder);
-
             builder.Property(p => p.Name).HasMaxLength(255).IsRequired();
             builder
                 .HasOne(x => x.User)
@@ -19,6 +17,7 @@
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasDiscriminator<PlaylistDataSourceFormatEnum>("PlaylistDataSourceType");
+            builder.HasIndex(x => x.Name);
         }
     }
 }
