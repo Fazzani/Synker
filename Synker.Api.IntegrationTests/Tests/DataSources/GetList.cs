@@ -20,7 +20,7 @@ namespace Synker.Api.IntegrationTests.Tests
 
         [Theory]
         [MemberData(nameof(GetData))]
-        public async Task GetList_DataSource_Ok(ListDatasourceQuery listDatasourceQuery, int ExpectedCount)
+        public async Task GetList_DataSource_Ok(ListDatasourceQuery listDatasourceQuery, int expectedCount)
         {
             var httpResponse = await _client.PostAsJsonAsync("/api/1.0/datasources/list", listDatasourceQuery);
 
@@ -31,7 +31,7 @@ namespace Synker.Api.IntegrationTests.Tests
 
             httpResponse.StatusCode.ShouldBe(HttpStatusCode.OK);
             ds.ShouldNotBeNull();
-            ds.Items.Count.ShouldBe(ExpectedCount);
+            ds.Items.Count.ShouldBe(expectedCount);
         }
 
         public static IEnumerable<object[]> GetData()
