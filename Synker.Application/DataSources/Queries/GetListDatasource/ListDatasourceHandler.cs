@@ -5,6 +5,7 @@
     using MediatR;
     using Microsoft.EntityFrameworkCore;
     using Synker.Application.Interfaces;
+    using Synker.Common;
     using Synker.Domain.Entities;
     using System;
     using System.Linq;
@@ -28,16 +29,16 @@
             Expression<Func<PlaylistDataSource, bool>> query = _ => true;
             Expression<Func<PlaylistDataSource, bool>> expNameContains = e => e.Name.Contains(request.Name, StringComparison.InvariantCultureIgnoreCase);
             Expression<Func<PlaylistDataSource, bool>> expCreatedAfter = e => e.CreatedDate >= request.CreatedFrom;
-            Expression<Func<PlaylistDataSource, bool>> expEnabled = e => request.Enabled.HasValue ? e.State == Domain.Entities.Core.OnlineState.Enabled : e.State == Domain.Entities.Core.OnlineState.Disabled;
+            Expression<Func<PlaylistDataSource, bool>> expEnabled = e => request.Enabled == true ? e.State == Domain.Entities.Core.OnlineState.Enabled : e.State == Domain.Entities.Core.OnlineState.Disabled;
 
             if (!string.IsNullOrEmpty(request.Name))
-                Expression.AndAlso(query, expNameContains);
+                query = query.CombineWithAndAlso(expNameContains);
 
             if (request.CreatedFrom.HasValue)
-                Expression.AndAlso(query, expCreatedAfter);
+                query = query.CombineWithAndAlso(expCreatedAfter);
 
             if (request.Enabled.HasValue)
-                Expression.AndAlso(query, expEnabled);
+                query = query.CombineWithAndAlso(expEnabled);
 
             var ds = _synkerDbContext.PlaylistDataSources.Where(query);
 

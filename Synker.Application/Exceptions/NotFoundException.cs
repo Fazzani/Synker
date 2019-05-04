@@ -8,5 +8,7 @@ namespace Synker.Application.Exceptions
             : base($"Entity \"{name}\" ({key}) was not found.")
         {
         }
+
+       
     }
 }

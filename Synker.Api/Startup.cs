@@ -21,7 +21,10 @@ using Synker.Application.DataSources.Queries.GetDatasource;
 using Synker.Application.Infrastructure.AutoMapper;
 using Synker.Application.Infrastructure.FluentValidationBehaviors;
 using Synker.Application.Interfaces;
+using Synker.Infrastructure;
 using Synker.Persistence;
+using Synker.Application.DataSources.Commands.Create;
+using FluentValidation.AspNetCore;
 
 namespace Synker.Api
 {
@@ -40,7 +43,8 @@ namespace Synker.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(options => options.Filters.Add(typeof(CustomExceptionFilterAttribute)))
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateDataSourceValidator>());
 
             services.AddAutoMapper(new Assembly[] { typeof(AutoMapperProfile).GetTypeInfo().Assembly });
 
@@ -49,6 +53,8 @@ namespace Synker.Api
 
             services.AddMediatR(typeof(GetDataSourceQueryHandler).GetTypeInfo().Assembly);
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+
+            services.AddTransient<INotificationService, NotificationService>();
 
             services.AddDbContext<ISynkerDbContext, SynkerDbContext>(options =>
             {

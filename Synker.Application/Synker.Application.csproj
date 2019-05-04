@@ -9,18 +9,21 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.1.0" />
     <PackageReference Include="FluentValidation" Version="8.3.0" />
-    <PackageReference Include="MediatR" Version="6.0.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.3.0" />
+    <PackageReference Include="MediatR" Version="7.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DataSources\Commands\" />
+    <Folder Include="DataSources\Commands\Delete\" />
+    <Folder Include="DataSources\Commands\Update\" />
     <Folder Include="Playlists\Commands\" />
     <Folder Include="Playlists\Queries\" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Synker.Common\Synker.Common.csproj" />
     <ProjectReference Include="..\Synker.Domain\Synker.Domain.csproj" />
   </ItemGroup>
 

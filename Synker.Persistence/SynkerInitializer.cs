@@ -1,5 +1,6 @@
 ﻿using Synker.Domain.Entities;
 using Synker.Domain.Entities.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -53,19 +54,31 @@ namespace Synker.Persistence
             {
                 User = Users[1],
                 Name = "dsm3u",
-                Uri = UriAddress.For("http://tests.synker.ovh/m3u")
+                Uri = UriAddress.For("http://tests.synker.ovh/m3u"),
+                CreatedDate= DateTime.UtcNow.AddDays(-2)
+            });
+
+            DataSources.Add(0, new M3uPlaylistDataSource
+            {
+                User = Users[2],
+                Name = "dsm3u_2",
+                Uri = UriAddress.For("http://tests.synker.ovh/m3u1"),
+                State = OnlineState.Disabled,
+                CreatedDate= DateTime.UtcNow.AddMonths(-5)
             });
 
             DataSources.Add(2, new XtreamPlaylistDataSource
             {
                 User = Users[1],
                 Name = "ds_xt_1",
+                CreatedDate= DateTime.UtcNow.AddMinutes(-13)
             });
 
             DataSources.Add(3, new XtreamPlaylistDataSource
             {
                 User = Users[2],
                 Name = "ds_xt_2",
+                CreatedDate= DateTime.UtcNow.AddYears(-2)
             });
 
             foreach (var ds in DataSources.Values)
