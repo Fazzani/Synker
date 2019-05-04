@@ -1,5 +1,6 @@
 using Shouldly;
 using Synker.Application.DataSources.Commands.Create;
+using Synker.Domain.Entities;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
@@ -18,7 +19,7 @@ namespace Synker.Api.IntegrationTests.Tests
         [Fact]
         public async Task Create_DataSource_BadRequest()
         {
-            var httpResponse = await _client.PostAsJsonAsync("/api/1.0/datasources", new CreateDataSourceCommand { });
+            var httpResponse = await _client.PostAsJsonAsync("/api/1.0/datasources", new CreateDataSourceCommand());
             httpResponse.StatusCode.ShouldBe(System.Net.HttpStatusCode.BadRequest);
         }
 
@@ -28,7 +29,7 @@ namespace Synker.Api.IntegrationTests.Tests
             var httpResponse = await _client.PostAsJsonAsync("/api/1.0/datasources", new CreateDataSourceCommand
             {
                 Name = "test",
-                PlaylistDataSourceFormat = Domain.Entities.PlaylistDataSourceFormatEnum.M3u,
+                PlaylistDataSourceFormat = PlaylistDataSourceFormatEnum.M3u,
                 State = true,
                 UserId = 1
             });
