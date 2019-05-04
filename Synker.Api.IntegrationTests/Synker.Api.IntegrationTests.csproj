@@ -22,4 +22,8 @@
     <ProjectReference Include="..\Synker.Api\Synker.Api.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Tests\Users\" />
+  </ItemGroup>
+
 </Project>

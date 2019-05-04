@@ -6,11 +6,11 @@ using Xunit;
 
 namespace Synker.Api.IntegrationTests.Tests
 {
-    public class GetDataSourceIntegrationTest : IClassFixture<CustomWebApplicationFactory<Startup>>
+    public class Get : IClassFixture<CustomWebApplicationFactory<Startup>>
     {
         private readonly HttpClient _client;
 
-        public GetDataSourceIntegrationTest(CustomWebApplicationFactory<Startup> factory)
+        public Get(CustomWebApplicationFactory<Startup> factory)
         {
             _client = factory.CreateClient();
         }

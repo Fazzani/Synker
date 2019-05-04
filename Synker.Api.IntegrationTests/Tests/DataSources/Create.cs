@@ -7,11 +7,11 @@ using Xunit;
 
 namespace Synker.Api.IntegrationTests.Tests
 {
-    public class CreateDataSourceIntegrationTest : IClassFixture<CustomWebApplicationFactory<Startup>>
+    public class Create : IClassFixture<CustomWebApplicationFactory<Startup>>
     {
         private readonly HttpClient _client;
 
-        public CreateDataSourceIntegrationTest(CustomWebApplicationFactory<Startup> factory)
+        public Create(CustomWebApplicationFactory<Startup> factory)
         {
             _client = factory.CreateClient();
         }
@@ -33,6 +33,7 @@ namespace Synker.Api.IntegrationTests.Tests
                 State = true,
                 UserId = 1
             });
+
             httpResponse.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
 
             //TODO: GET "Created" Status with dataSource id

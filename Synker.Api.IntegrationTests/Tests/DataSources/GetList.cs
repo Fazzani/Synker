@@ -2,17 +2,18 @@ using Shouldly;
 using Synker.Application.DataSources.Queries.GetListDatasource;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace Synker.Api.IntegrationTests.Tests
 {
-    public class GetListDataSourceIntegrationTest : IClassFixture<CustomWebApplicationFactory<Startup>>
+    public class GetList : IClassFixture<CustomWebApplicationFactory<Startup>>
     {
         private readonly HttpClient _client;
 
-        public GetListDataSourceIntegrationTest(CustomWebApplicationFactory<Startup> factory)
+        public GetList(CustomWebApplicationFactory<Startup> factory)
         {
             _client = factory.CreateClient();
         }
@@ -28,7 +29,7 @@ namespace Synker.Api.IntegrationTests.Tests
 
             var ds = await Utilities.GetResponseContent<ListDatasourceViewModel>(httpResponse);
 
-            httpResponse.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
+            httpResponse.StatusCode.ShouldBe(HttpStatusCode.OK);
             ds.ShouldNotBeNull();
             ds.Items.Count.ShouldBe(ExpectedCount);
         }
