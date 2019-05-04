@@ -1,4 +1,4 @@
-﻿namespace Synker.Application.DataSources.Queries
+﻿namespace Synker.Application.DataSources.Queries.GetDatasource
 {
     using AutoMapper;
     using Synker.Application.Exceptions;
@@ -20,7 +20,7 @@
 
         public async Task<DataSourceViewModel> Handle(GetDataSourceQuery request, CancellationToken cancellationToken)
         {
-          var datasource =  await _synkerDbContext.PlaylistDataSources.FindAsync(request.Id, cancellationToken);
+            var datasource = await _synkerDbContext.PlaylistDataSources.FindAsync(new object[] { request.Id }, cancellationToken: cancellationToken);
 
             if (datasource == null)
             {

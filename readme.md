@@ -27,7 +27,7 @@ Inspired from [NorthwindTraders][NorthwindTraders]
 
 ## Techno and frameworks
 
-- OPEN API 3
+- OPEN API 3 with [NSwag][nswag_repo]
 - Event sourcing
 - [MediatR](https://github.com/jbogard/MediatR/wiki)
 - TDD
@@ -37,7 +37,7 @@ Inspired from [NorthwindTraders][NorthwindTraders]
   - BeatPulse.Elasticsearch
   - BeatPulse.Npgsql
 - Serilog for logging
-- AutoMapper
+- [AutoMapper](https://automapper.org/)
 - [Fluentvalidation](https://fluentvalidation.net/start)
 - [Command CQRS validation](https://www.linkedin.com/pulse/validation-ddd-cqrs-luca-briguglia/)
 - [DDD Aggregate pattern](https://martinfowler.com/bliki/DDD_Aggregate.html)
@@ -68,3 +68,4 @@ Inspired from [NorthwindTraders][NorthwindTraders]
 [beat_pulse_github]:https://github.com/Xabaril/BeatPulse
 [NorthwindTraders]:https://github.com/JasonGT/NorthwindTraders
 [Persistence Ignorance]:http://www.kamilgrzybek.com/design/domain-model-encapsulation-and-pi-with-entity-framework-2-2/
+[nswag_repo]:https://github.com/RicoSuter/NSwag

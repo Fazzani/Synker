@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using AutoMapper;
 using BeatPulse.UI;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -13,7 +14,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using NSwag;
+using Synker.Api.Filters;
 using Synker.Application.DataSources.Queries;
+using Synker.Application.DataSources.Queries.GetDatasource;
+using Synker.Application.Infrastructure.AutoMapper;
 using Synker.Application.Interfaces;
 using Synker.Persistence;
 
@@ -21,6 +26,8 @@ namespace Synker.Api
 {
     public class Startup
     {
+        public static string AssemblyVersion = typeof(Startup).GetTypeInfo().Assembly.GetCustomAttribute<AssemblyFileVersionAttribute>().Version;
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -31,7 +38,10 @@ namespace Synker.Api
         // This method gets called by the runtime. Use this method   to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(options => options.Filters.Add(typeof(CustomExceptionFilterAttribute)))
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddAutoMapper(new Assembly[] { typeof(AutoMapperProfile).GetTypeInfo().Assembly });
 
             //Some problems with the SynkerDBContext migration
             services.AddBeatPulseUI();
@@ -54,6 +64,28 @@ namespace Synker.Api
                 //options.ConfigureWarnings(warnings => warnings.Throw(
                 //RelationalEventId.QueryClientEvaluationWarning));
             });
+
+            services.AddApiVersioning(o =>
+            {
+                o.AssumeDefaultVersionWhenUnspecified = true;
+                o.DefaultApiVersion = new ApiVersion(1, 0);
+            });
+
+            services.AddOpenApiDocument(config =>
+            {
+                config.PostProcess = document =>
+                {
+                    document.Info = new SwaggerInfo
+                    {
+                        Version = "v1",
+                        Title = "Synker API",
+                        Description = $"Synchronize playlists API {AssemblyVersion}",
+                        TermsOfService = "None",
+                        Contact = new SwaggerContact { Name = "Synker", Email = "contact@synker.ovh", Url = "https://www.github.com/fazzani/synker2" },
+                        License = new SwaggerLicense { Name = "Use under MIT", Url = "" },
+                    };
+                };
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,11 +97,13 @@ namespace Synker.Api
             }
 
             app.UseBeatPulseUI();
+            app.UseStaticFiles();
 
+            app.UseSwagger();
             app.UseSwaggerUi3(settings =>
             {
                 settings.Path = "/api";
-                settings.DocumentPath = "/api/specification.json";
+                //settings.DocumentPath = "/api/specification.json";
             });
 
             app.UseMvc();
