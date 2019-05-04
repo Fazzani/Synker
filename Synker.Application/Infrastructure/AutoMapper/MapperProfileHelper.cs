@@ -23,8 +23,8 @@ namespace Synker.Application.Infrastructure.AutoMapper
                     from instance in type.GetInterfaces()
                     where
                         instance.IsGenericType && instance.GetGenericTypeDefinition() == typeof(IMapFrom<>) &&
-                        !type.IsAbstract &&
-                        !type.IsInterface
+                        !type.IsAbstract
+                        && !type.IsInterface
                     select new Map
                     {
                         Source = type.GetInterfaces().First().GetGenericArguments().First(),
@@ -43,8 +43,8 @@ namespace Synker.Application.Infrastructure.AutoMapper
                     from instance in type.GetInterfaces()
                     where
                         typeof(IHaveCustomMapping).IsAssignableFrom(type) &&
-                        !type.IsAbstract &&
-                        !type.IsInterface
+                        !type.IsAbstract
+                        && !type.IsInterface
                     select (IHaveCustomMapping)Activator.CreateInstance(type)).ToList();
 
             return mapsFrom;

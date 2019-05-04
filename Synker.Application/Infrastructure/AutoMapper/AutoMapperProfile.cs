@@ -22,9 +22,7 @@ namespace Synker.Application.Infrastructure.AutoMapper
 
         private void LoadStandardMappings()
         {
-            var mapsFrom = MapperProfileHelper.LoadStandardMappings(Assembly.GetExecutingAssembly());
-
-            foreach (var map in mapsFrom)
+            foreach (var map in MapperProfileHelper.LoadStandardMappings(Assembly.GetExecutingAssembly()))
             {
                 CreateMap(map.Source, map.Destination).ReverseMap();
             }
@@ -32,9 +30,7 @@ namespace Synker.Application.Infrastructure.AutoMapper
 
         private void LoadCustomMappings()
         {
-            var mapsFrom = MapperProfileHelper.LoadCustomMappings(Assembly.GetExecutingAssembly());
-
-            foreach (var map in mapsFrom)
+            foreach (var map in MapperProfileHelper.LoadCustomMappings(Assembly.GetExecutingAssembly()))
             {
                 map.CreateMappings(this);
             }
