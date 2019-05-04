@@ -19,6 +19,7 @@ using Synker.Api.Filters;
 using Synker.Application.DataSources.Queries;
 using Synker.Application.DataSources.Queries.GetDatasource;
 using Synker.Application.Infrastructure.AutoMapper;
+using Synker.Application.Infrastructure.FluentValidationBehaviors;
 using Synker.Application.Interfaces;
 using Synker.Persistence;
 
@@ -47,6 +48,7 @@ namespace Synker.Api
             services.AddBeatPulseUI();
 
             services.AddMediatR(typeof(GetDataSourceQueryHandler).GetTypeInfo().Assembly);
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
 
             services.AddDbContext<ISynkerDbContext, SynkerDbContext>(options =>
             {
