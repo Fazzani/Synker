@@ -1,10 +1,11 @@
 name: $(Date:yyyyMMdd).$(Rev:.r)
+pool:
+  vmImage: 'ubuntu-16.04'
 trigger:
 - master
 variables:
   buildConfiguration: 'Release'
-pool:
-  vmImage: 'ubuntu-16.04'
+
 steps:
 - task: DotNetCoreInstaller@0
   inputs:
@@ -16,17 +17,19 @@ steps:
   inputs:
     command: build
     projects: '**/*.csproj'
-    arguments: '--configuration $(buildConfiguration)'
+    arguments: '--no-restore --configuration $(buildConfiguration)'
 - task: DotNetCoreCLI@2
   displayName: 'dotnet test $(buildConfiguration)'
   inputs:
     command: test
     projects: '**/*Tests/*.csproj'
-    arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
+    arguments: ' --no-build --configuration $(buildConfiguration) --collect "Code coverage"'
 - task: DotNetCoreCLI@2
   displayName: 'dotnet publish $(buildConfiguration)'
   inputs:
     command: publish
-    publishWebProjects: True
-    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-    zipAfterPublish: True
+    projects: Synker.Api/Synker.Api.csproj
+    arguments: ' --no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: true
+    publishWebProjects: false
+    modifyOutputPath: true
