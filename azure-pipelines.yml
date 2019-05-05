@@ -1,8 +1,18 @@
 name: $(Date:yyyyMMdd).$(Rev:.r)
+
+strategy:
+  matrix:
+    linux:
+      imageName: 'ubuntu-16.04'
+    windows:
+imageName: 'vs2017-win2016'
+
 pool:
-  vmImage: 'ubuntu-16.04'
+  vmImage: $(imageName)
+
 trigger:
 - master
+
 variables:
   buildConfiguration: 'Release'
 
@@ -10,20 +20,59 @@ steps:
 - task: DotNetCoreInstaller@0
   inputs:
     version: '2.2.203'
+
 - script: dotnet restore
   displayName: 'dotnet restore $(buildConfiguration)'
+
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build $(buildConfiguration)'
   inputs:
     command: build
     projects: '**/*.csproj'
     arguments: '--no-restore --configuration $(buildConfiguration)'
+
 - task: DotNetCoreCLI@2
   displayName: 'dotnet test $(buildConfiguration)'
   inputs:
     command: test
     projects: '**/*Tests/*.csproj'
-    arguments: ' --no-build --configuration $(buildConfiguration) --collect "Code coverage"'
+    arguments: '--logger trx --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=$(Build.SourcesDirectory)/coverage/ --configuration $(buildConfiguration) --collect "Code coverage"'
+
+- script: |
+    dotnet tool install dotnet-reportgenerator-globaltool --tool-path . 
+    ./reportgenerator "-reports:$(Build.SourcesDirectory)/coverage/coverage.opencover.xml" "-targetdir:coverage/Cobertura" "-reporttypes:Cobertura;HTMLInline;HTMLChart"
+  condition: eq( variables['Agent.OS'], 'Linux' )
+  displayName: Run Reportgenerator on Linux
+
+- script: |
+    dotnet tool install dotnet-reportgenerator-globaltool --tool-path .
+    .\reportgenerator.exe "-reports:$(Build.SourcesDirectory)/coverage/coverage.opencover.xml" "-targetdir:coverage/Cobertura" "-reporttypes:Cobertura;HTMLInline;HTMLChart"
+  condition: eq( variables['Agent.OS'], 'Windows_NT' )
+  displayName: Run Reportgenerator on Windows
+
+- task: PublishTestResults@2
+  inputs:
+    testRunner: VSTest
+  testResultsFiles: '**/*.trx'
+
+- task: PublishCodeCoverageResults@1
+  inputs:
+    summaryFileLocation: $(Build.SourcesDirectory)/coverage/Cobertura/Cobertura.xml
+    reportDirectory: $(Build.SourcesDirectory)/coverage/Cobertura
+  codecoverageTool: cobertura
+
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: '927afb1a-f6f6-430b-b477-a0007d55b46c'
+    organization: 'fazzani-github'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+
+- task: SonarCloudPublish@1
+  inputs:
+    cliProjectKey: 'SynkerAPI'
+    cliProjectName: 'SynkerAPI'
+
 - task: DotNetCoreCLI@2
   displayName: 'dotnet publish $(buildConfiguration)'
   inputs:
@@ -33,3 +82,5 @@ steps:
     zipAfterPublish: true
     publishWebProjects: false
     modifyOutputPath: true
+
+- task: PublishBuildArtifacts@1
