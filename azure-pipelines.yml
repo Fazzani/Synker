@@ -50,7 +50,7 @@ steps:
 # First install the tool on the machine, then run it
 - script: |
     dotnet tool install -g dotnet-reportgenerator-globaltool
-    reportgenerator -reports:$(Build.SourcesDirectory)/tests/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/CodeCoverage -reporttypes:HtmlInline_AzurePipelines;Cobertura
+    reportgenerator -reports:$(Build.SourcesDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/CodeCoverage -reporttypes:HtmlInline_AzurePipelines;Cobertura
   condition: eq( variables['Agent.OS'], 'Linux' )
   displayName: Create Code coverage report
 
