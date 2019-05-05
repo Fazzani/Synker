@@ -17,9 +17,14 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: DotNetCoreInstaller@0
+
+- task: SonarCloudPrepare@1
   inputs:
-    version: '2.2.203'
+    SonarCloud: '927afb1a-f6f6-430b-b477-a0007d55b46c'
+    organization: 'fazzani-github'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    extraProperties: 'sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/coverage/coverage.opencover.xml'
 
 - script: dotnet restore
   displayName: 'dotnet restore $(buildConfiguration)'
@@ -36,7 +41,7 @@ steps:
   inputs:
     command: test
     projects: '**/*Tests/*.csproj'
-    arguments: '--logger trx --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=$(Build.SourcesDirectory)/coverage/ --configuration $(buildConfiguration) --collect "Code coverage"'
+    arguments: ' dotnet test --logger trx --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=$(Build.SourcesDirectory)/coverage/'
 
 - script: |
     dotnet tool install dotnet-reportgenerator-globaltool --tool-path . 
@@ -60,13 +65,6 @@ steps:
     summaryFileLocation: $(Build.SourcesDirectory)/coverage/Cobertura/Cobertura.xml
     reportDirectory: $(Build.SourcesDirectory)/coverage/Cobertura
     codecoverageTool: cobertura
-
-- task: SonarCloudPrepare@1
-  inputs:
-    SonarCloud: '927afb1a-f6f6-430b-b477-a0007d55b46c'
-    organization: 'fazzani-github'
-    scannerMode: 'CLI'
-    configMode: 'manual'
 
 - task: SonarCloudPublish@1
   inputs:
