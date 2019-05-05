@@ -28,7 +28,7 @@ Inspired from [NorthwindTraders][NorthwindTraders]
 
 This is using ASP.NET Core with:
 
-- Entity Framework Core on PostgreSQL and InMmemory for testing
+- Entity Framework Core on PostgreSQL and InMemory for testing
 - OPEN API 3 with [NSwag][nswag_repo]
 - Event sourcing
 - [MediatR](https://github.com/jbogard/MediatR/wiki)

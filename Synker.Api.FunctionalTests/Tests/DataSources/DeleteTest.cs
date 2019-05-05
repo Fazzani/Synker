@@ -28,15 +28,8 @@ namespace Synker.Api.FunctionalTests.Tests.DataSources
         public async Task Delete_DataSource_Ok()
         {
             var httpResponse = await _client.DeleteAsync("/api/1.0/datasources/1");
-
             httpResponse.EnsureSuccessStatusCode();
-
             httpResponse.StatusCode.ShouldBe(System.Net.HttpStatusCode.NoContent);
-
-            var ds = await Utilities.GetResponseContent<long>(httpResponse);
-
-            ds.ShouldNotBeNull();
-            ds.ShouldBeGreaterThan(0);
         }
     }
 }

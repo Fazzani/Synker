@@ -6,6 +6,7 @@ using Synker.Application.DataSources.Commands.Delete;
 using Synker.Application.DataSources.Commands.Update;
 using Synker.Application.DataSources.Queries.GetDatasource;
 using Synker.Application.DataSources.Queries.GetListDatasource;
+using Synker.Application.Infrastructure.PagedResult;
 using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace Synker.Api.Controllers
     public class DataSourcesController : BaseController
     {
         [HttpPost("list")]
-        [ProducesResponseType(typeof(ListDatasourceViewModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(PagedResult<DatasourceLookupViewModel>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetList([FromBody] ListDatasourceQuery query, CancellationToken cancellationToken)
         {
             return Ok(await Mediator.Send(query, cancellationToken));

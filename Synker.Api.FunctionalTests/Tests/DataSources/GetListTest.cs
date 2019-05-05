@@ -1,5 +1,6 @@
 using Shouldly;
 using Synker.Application.DataSources.Queries.GetListDatasource;
+using Synker.Application.Infrastructure.PagedResult;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -29,10 +30,10 @@ namespace Synker.Api.FunctionalTests.Tests.DataSources
             httpResponse.EnsureSuccessStatusCode();
             httpResponse.StatusCode.ShouldBe(HttpStatusCode.OK);
 
-            var ds = await Utilities.GetResponseContent<ListDatasourceViewModel>(httpResponse);
+            var ds = await Utilities.GetResponseContent<PagedResult<DatasourceLookupViewModel>>(httpResponse);
 
             ds.ShouldNotBeNull();
-            ds.Items.Count.ShouldBe(expectedCount);
+            ds.Results.Count.ShouldBe(expectedCount);
         }
 
         public static IEnumerable<object[]> GetData()
