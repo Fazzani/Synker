@@ -42,13 +42,12 @@
 
             var ds = _synkerDbContext.PlaylistDataSources.Where(query);
 
-            var model = new ListDatasourceViewModel();
-
-            model.Items = await ds
+            return new ListDatasourceViewModel
+            {
+                Items = await ds
                 .ProjectTo<DatasourceLookupViewModel>(_mapper.ConfigurationProvider)
-                .ToListAsync(cancellationToken);
-
-            return model;
+                .ToListAsync(cancellationToken)
+            };
         }
     }
 }

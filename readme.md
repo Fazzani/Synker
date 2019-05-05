@@ -1,4 +1,4 @@
-# Synker API
+# ![Synker API](logo.png)
 
 ## Architecture (Clean architecture)
 
@@ -24,7 +24,9 @@ Inspired from [NorthwindTraders][NorthwindTraders]
 - Authentication Service (IDP)
 - Notification Service
 
-## Techno and frameworks
+## How it works
+
+This is using ASP.NET Core with:
 
 - OPEN API 3 with [NSwag][nswag_repo]
 - Event sourcing
