@@ -49,10 +49,15 @@ steps:
     arguments: '--logger trx --configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
     nobuild: true
 
+- task: DotNetCoreCLI@2
+    displayName: Install ReportGenerator Global Tool
+    inputs:
+      command: custom
+      custom: tool
+      arguments: install dotnet-reportgenerator-globaltool -g
 # Generate the report using ReportGenerator (https://github.com/danielpalme/ReportGenerator)
 # First install the tool on the machine, then run it
 - script: |
-    dotnet install dotnet-reportgenerator-globaltool -g
     echo "##vso[task.prependpath]$HOME/.dotnet/tools"
     ./reportgenerator -reports:$(Build.SourcesDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/CodeCoverage -reporttypes:HtmlInline_AzurePipelines;Cobertura
   condition: eq( variables['Agent.OS'], 'Linux' )
