@@ -62,11 +62,9 @@ Inspired from [NorthwindTraders][NorthwindTraders]
 
 ## Go further & references
 
-Docs
-
-– [Clean Architecture][clean_archi]
-– [Onion Architecture][onion_archi]
-– [Ports And Adapters / Hexagonal Architecture][port_adapter_hexa]
+- [Clean Architecture][clean_archi]
+- [Onion Architecture][onion_archi]
+- [Ports And Adapters / Hexagonal Architecture][port_adapter_hexa]
 - [Example Clean Archi 1][example_archi_1]
 - [Example Clean Archi 2][example_archi_2]
 
