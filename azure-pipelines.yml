@@ -1,3 +1,8 @@
+name: $(Date:yyyyMMdd).$(Rev:.r)
+trigger:
+- master
+variables:
+  buildConfiguration: 'Release'
 pool:
   vmImage: 'ubuntu-16.04'
 steps:
@@ -5,25 +10,23 @@ steps:
   inputs:
     version: '2.2.203'
 - script: dotnet restore
+  displayName: 'dotnet restore $(buildConfiguration)'
 - task: DotNetCoreCLI@2
-  displayName: Build
+  displayName: 'dotnet build $(buildConfiguration)'
   inputs:
     command: build
     projects: '**/*.csproj'
-    arguments: '--configuration Release' # Update this to match your need
-- task: DotNetCoreCLI@2
-  inputs:
-    command: test
-    projects: '**/*Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
 - task: DotNetCoreCLI@2
+  displayName: 'dotnet test $(buildConfiguration)'
   inputs:
     command: test
     projects: '**/*Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
 - task: DotNetCoreCLI@2
+  displayName: 'dotnet publish $(buildConfiguration)'
   inputs:
     command: publish
     publishWebProjects: True
-    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: True
