@@ -53,13 +53,13 @@ steps:
 - task: PublishTestResults@2
   inputs:
     testRunner: VSTest
-  testResultsFiles: '**/*.trx'
+    testResultsFiles: '**/*.trx'
 
 - task: PublishCodeCoverageResults@1
   inputs:
     summaryFileLocation: $(Build.SourcesDirectory)/coverage/Cobertura/Cobertura.xml
     reportDirectory: $(Build.SourcesDirectory)/coverage/Cobertura
-  codecoverageTool: cobertura
+    codecoverageTool: cobertura
 
 - task: SonarCloudPrepare@1
   inputs:
