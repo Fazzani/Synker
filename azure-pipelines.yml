@@ -59,7 +59,7 @@ steps:
 # First install the tool on the machine, then run it
 - script: |
     echo "##vso[task.prependpath]$HOME/.dotnet/tools"
-    ./reportgenerator -reports:$(Build.SourcesDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/CodeCoverage -reporttypes:HtmlInline_AzurePipelines;Cobertura
+    reportgenerator -reports:$(Build.SourcesDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/CodeCoverage -reporttypes:HtmlInline_AzurePipelines;Cobertura
   condition: eq( variables['Agent.OS'], 'Linux' )
   displayName: Create Code coverage report
 
