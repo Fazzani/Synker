@@ -5,7 +5,6 @@
 Inspired from [NorthwindTraders][NorthwindTraders]
 [Slides](https://github.com/Fazzani/Synker/raw/master/docs/Slides.pdf)
 
-
 ### Schema
 
 ![archi_clean](https://fullstackmark.com/img/posts/11/clean-architecture-circle-diagram.jpg)
@@ -30,7 +29,11 @@ Inspired from [NorthwindTraders][NorthwindTraders]
 - OPEN API 3 with [NSwag][nswag_repo]
 - Event sourcing
 - [MediatR](https://github.com/jbogard/MediatR/wiki)
-- TDD with Xunit, [anglesharp][anglesharp] and [Moq][moq_repo]
+- TDD:
+  - Xunit, 
+  - [anglesharp][anglesharp] 
+  - [Moq][moq_repo]
+  - e2e with [Cypress][cypress]
 - Prometheus metrics
 - [Beat Pulse][beat_pulse_github] for liveness and readiness check
   - BeatPulse.IdSvr
@@ -59,11 +62,11 @@ Inspired from [NorthwindTraders][NorthwindTraders]
 
 ## Go further
 
-– [Clean Architecture](http://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
-– [Onion Architecture](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/)
-– [Ports And Adapters / Hexagonal Architecture](https://herbertograca.com/2017/09/14/ports-adapters-architecture/)
-- [Example Clean Archi 1](https://fullstackmark.com/post/11/better-software-design-with-clean-architecture)
-- [Example Clean Archi 2](https://fullstackmark.com/post/18/building-aspnet-core-web-apis-with-clean-architecture)
+– [Clean Architecture][clean_archi]
+– [Onion Architecture][onion_archi]
+– [Ports And Adapters / Hexagonal Architecture][port_adapter_hexa]
+- [Example Clean Archi 1][example_archi_1]
+- [Example Clean Archi 2][example_archi_2]
 
 [beat_pulse_github]:https://github.com/Xabaril/BeatPulse
 [NorthwindTraders]:https://github.com/JasonGT/NorthwindTraders
@@ -71,3 +74,9 @@ Inspired from [NorthwindTraders][NorthwindTraders]
 [nswag_repo]:https://github.com/RicoSuter/NSwag
 [moq_repo]:https://github.com/moq/moq4
 [anglesharp]:https://anglesharp.github.io/
+[clean_archi]:http://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
+[onion_archi]:https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/)
+[port_adapter_hexa]:https://herbertograca.com/2017/09/14/ports-adapters-architecture/
+[example_archi_1]:https://fullstackmark.com/post/11/better-software-design-with-clean-architecture
+[example_archi_2]:https://fullstackmark.com/post/18/building-aspnet-core-web-apis-with-clean-architecture
+[cypress]:https://www.cypress.io/
