@@ -75,7 +75,7 @@ Inspired from [NorthwindTraders][NorthwindTraders]
 [moq_repo]:https://github.com/moq/moq4
 [anglesharp]:https://anglesharp.github.io/
 [clean_archi]:http://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
-[onion_archi]:https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/)
+[onion_archi]:https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1
 [port_adapter_hexa]:https://herbertograca.com/2017/09/14/ports-adapters-architecture/
 [example_archi_1]:https://fullstackmark.com/post/11/better-software-design-with-clean-architecture
 [example_archi_2]:https://fullstackmark.com/post/18/building-aspnet-core-web-apis-with-clean-architecture
