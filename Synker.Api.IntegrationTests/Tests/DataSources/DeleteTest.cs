@@ -32,6 +32,11 @@ namespace Synker.Api.IntegrationTests.Tests.DataSources
             httpResponse.EnsureSuccessStatusCode();
 
             httpResponse.StatusCode.ShouldBe(System.Net.HttpStatusCode.NoContent);
+
+            var ds = await Utilities.GetResponseContent<long>(httpResponse);
+
+            ds.ShouldNotBeNull();
+            ds.ShouldBeGreaterThan(0);
         }
     }
 }

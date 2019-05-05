@@ -6,6 +6,7 @@ using Synker.Application.DataSources.Commands.Delete;
 using Synker.Application.DataSources.Commands.Update;
 using Synker.Application.DataSources.Queries.GetDatasource;
 using Synker.Application.DataSources.Queries.GetListDatasource;
+using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -20,21 +21,22 @@ namespace Synker.Api.Controllers
             return Ok(await Mediator.Send(query, cancellationToken));
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = nameof(Get))]
         [ProducesResponseType(typeof(DataSourceViewModel), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Get(long id, CancellationToken cancellationToken)
+        public async Task<IActionResult> Get([FromRoute][Required]long id, CancellationToken cancellationToken)
         {
             return Ok(await Mediator.Send(new GetDataSourceQuery { Id = id }, cancellationToken));
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(ListDatasourceViewModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(long), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Post([FromBody] CreateDataSourceCommand cmd, CancellationToken cancellationToken)
         {
-            return Ok(await Mediator.Send(cmd, cancellationToken));
+            var dataSourceId = await Mediator.Send(cmd, cancellationToken);
+            return CreatedAtRoute(nameof(Get), new { id = dataSourceId }, cmd);
         }
 
         [HttpPut("{id}")]

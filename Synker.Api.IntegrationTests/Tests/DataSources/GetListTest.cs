@@ -27,10 +27,10 @@ namespace Synker.Api.IntegrationTests.Tests.DataSources
 
             // Must be successful.
             httpResponse.EnsureSuccessStatusCode();
+            httpResponse.StatusCode.ShouldBe(HttpStatusCode.OK);
 
             var ds = await Utilities.GetResponseContent<ListDatasourceViewModel>(httpResponse);
 
-            httpResponse.StatusCode.ShouldBe(HttpStatusCode.OK);
             ds.ShouldNotBeNull();
             ds.Items.Count.ShouldBe(expectedCount);
         }

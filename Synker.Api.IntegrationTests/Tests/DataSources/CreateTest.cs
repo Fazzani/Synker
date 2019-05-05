@@ -26,7 +26,7 @@ namespace Synker.Api.IntegrationTests.Tests.DataSources
         }
 
         [Fact, Order(1)]
-        public async Task Create_DataSource_Ok()
+        public async Task Create_DataSource_Created()
         {
             var httpResponse = await _client.PostAsJsonAsync("/api/1.0/datasources", new CreateDataSourceCommand
             {
@@ -36,7 +36,9 @@ namespace Synker.Api.IntegrationTests.Tests.DataSources
                 UserId = 1
             });
 
-            httpResponse.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
+            httpResponse.EnsureSuccessStatusCode();
+
+            httpResponse.StatusCode.ShouldBe(System.Net.HttpStatusCode.Created);
 
             //TODO: GET "Created" Status with dataSource id
         }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Synker.Application.DataSources.Commands.Create
 {
-    public class CreateDataSourceCommand : IRequest
+    public class CreateDataSourceCommand : IRequest<long>
     {
         public string Name { get; set; }
 
@@ -17,7 +17,7 @@ namespace Synker.Application.DataSources.Commands.Create
 
         public PlaylistDataSourceFormatEnum PlaylistDataSourceFormat { get; set; }
 
-        public class Handler : IRequestHandler<CreateDataSourceCommand, Unit>
+        public class Handler : IRequestHandler<CreateDataSourceCommand, long>
         {
             private readonly ISynkerDbContext _context;
             private readonly IMediator _mediator;
@@ -28,7 +28,7 @@ namespace Synker.Application.DataSources.Commands.Create
                 _mediator = mediator;
             }
 
-            public async Task<Unit> Handle(CreateDataSourceCommand request, CancellationToken cancellationToken)
+            public async Task<long> Handle(CreateDataSourceCommand request, CancellationToken cancellationToken)
             {
                 var user = await _context.Users.FindAsync(new object[] { request.UserId }, cancellationToken: cancellationToken);
 
@@ -51,7 +51,7 @@ namespace Synker.Application.DataSources.Commands.Create
 
                 await _mediator.Publish(new DataSourceCreated { DataSourceId = entity.Id }, cancellationToken);
 
-                return Unit.Value;
+                return entity.Id;
             }
         }
     }
