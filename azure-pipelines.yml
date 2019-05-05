@@ -52,7 +52,8 @@ steps:
 # Generate the report using ReportGenerator (https://github.com/danielpalme/ReportGenerator)
 # First install the tool on the machine, then run it
 - script: |
-    install dotnet-reportgenerator-globaltool --version 4.0.15 --tool-path .
+    install dotnet-reportgenerator-globaltool -g
+    echo "##vso[task.prependpath]$HOME/.dotnet/tools"
     ./reportgenerator -reports:$(Build.SourcesDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/CodeCoverage -reporttypes:HtmlInline_AzurePipelines;Cobertura
   condition: eq( variables['Agent.OS'], 'Linux' )
   displayName: Create Code coverage report
