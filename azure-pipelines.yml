@@ -43,7 +43,7 @@ steps:
   inputs:
     command: test
     projects: '**/*Tests/*.csproj'
-    arguments: '--logger trx -configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
+    arguments: '--logger trx --configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
     nobuild: true
 
 # Generate the report using ReportGenerator (https://github.com/danielpalme/ReportGenerator)
