@@ -1,16 +1,14 @@
 ﻿using Newtonsoft.Json;
 using Synker.Persistence;
-using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Synker.Api.IntegrationTests
+namespace Synker.Api.FunctionalTests
 {
     public class Utilities
     {
-        public static StringContent GetRequestContent(object obj)
+        public static StringContent GetRequestJsonContent(object obj)
         {
             return new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json");
         }
@@ -19,9 +17,7 @@ namespace Synker.Api.IntegrationTests
         {
             var stringResponse = await response.Content.ReadAsStringAsync();
 
-            var result = JsonConvert.DeserializeObject<T>(stringResponse);
-
-            return result;
+            return JsonConvert.DeserializeObject<T>(stringResponse);
         }
 
         public static void InitializeDbForTests(SynkerDbContext context)

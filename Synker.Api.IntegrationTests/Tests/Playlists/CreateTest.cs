@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Text;
 using Xunit;
 
-namespace Synker.Api.IntegrationTests.Tests.Playlists
+namespace Synker.Api.FunctionalTests.Tests.Playlists
 {
     [Collection("Playlist")]
     public class CreateTest : IClassFixture<CustomWebApplicationFactory<Startup>>

@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Synker.Api.IntegrationTests.Tests.DataSources
+namespace Synker.Api.FunctionalTests.Tests.DataSources
 {
     [Collection("DataSource")]
     public class GetListTest : IClassFixture<CustomWebApplicationFactory<Startup>>

@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 using Synker.Persistence;
 using System;
 
-namespace Synker.Api.IntegrationTests
+namespace Synker.Api.FunctionalTests
 {
     public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<Startup>
     {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Xunit;
 using Xunit.Extensions.Ordering;
 
-namespace Synker.Api.IntegrationTests.Tests.DataSources
+namespace Synker.Api.FunctionalTests.Tests.DataSources
 {
     [Collection("DataSource")]
     public class CreateTest : IClassFixture<CustomWebApplicationFactory<Startup>>

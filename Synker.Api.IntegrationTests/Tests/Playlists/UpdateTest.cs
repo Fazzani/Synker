@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
+﻿using System.Net.Http;
 using Xunit;
 
-namespace Synker.Api.IntegrationTests.Tests.Playlists
+namespace Synker.Api.FunctionalTests.Tests.Playlists
 {
     [Collection("Playlist")]
     public class UpdateTest : IClassFixture<CustomWebApplicationFactory<Startup>>
