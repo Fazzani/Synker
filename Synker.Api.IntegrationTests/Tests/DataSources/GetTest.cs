@@ -4,13 +4,14 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Synker.Api.IntegrationTests.Tests
+namespace Synker.Api.IntegrationTests.Tests.DataSources
 {
-    public class Get : IClassFixture<CustomWebApplicationFactory<Startup>>
+    [Collection("DataSource")]
+    public class GetTest : IClassFixture<CustomWebApplicationFactory<Startup>>
     {
         private readonly HttpClient _client;
 
-        public Get(CustomWebApplicationFactory<Startup> factory)
+        public GetTest(CustomWebApplicationFactory<Startup> factory)
         {
             _client = factory.CreateClient();
         }

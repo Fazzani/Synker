@@ -4,26 +4,28 @@ using Synker.Domain.Entities;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
+using Xunit.Extensions.Ordering;
 
-namespace Synker.Api.IntegrationTests.Tests
+namespace Synker.Api.IntegrationTests.Tests.DataSources
 {
-    public class Create : IClassFixture<CustomWebApplicationFactory<Startup>>
+    [Collection("DataSource")]
+    public class CreateTest : IClassFixture<CustomWebApplicationFactory<Startup>>
     {
         private readonly HttpClient _client;
 
-        public Create(CustomWebApplicationFactory<Startup> factory)
+        public CreateTest(CustomWebApplicationFactory<Startup> factory)
         {
             _client = factory.CreateClient();
         }
 
-        [Fact]
+        [Fact, Order(0)]
         public async Task Create_DataSource_BadRequest()
         {
             var httpResponse = await _client.PostAsJsonAsync("/api/1.0/datasources", new CreateDataSourceCommand());
             httpResponse.StatusCode.ShouldBe(System.Net.HttpStatusCode.BadRequest);
         }
 
-        [Fact]
+        [Fact, Order(1)]
         public async Task Create_DataSource_Ok()
         {
             var httpResponse = await _client.PostAsJsonAsync("/api/1.0/datasources", new CreateDataSourceCommand
@@ -38,5 +40,6 @@ namespace Synker.Api.IntegrationTests.Tests
 
             //TODO: GET "Created" Status with dataSource id
         }
+
     }
 }

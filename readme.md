@@ -30,7 +30,7 @@ Inspired from [NorthwindTraders][NorthwindTraders]
 - OPEN API 3 with [NSwag][nswag_repo]
 - Event sourcing
 - [MediatR](https://github.com/jbogard/MediatR/wiki)
-- TDD with Xunit and [Moq][moq_repo]
+- TDD with Xunit, [anglesharp][anglesharp] and [Moq][moq_repo]
 - Prometheus metrics
 - [Beat Pulse][beat_pulse_github] for liveness and readiness check
   - BeatPulse.IdSvr
@@ -70,3 +70,4 @@ Inspired from [NorthwindTraders][NorthwindTraders]
 [Persistence Ignorance]:http://www.kamilgrzybek.com/design/domain-model-encapsulation-and-pi-with-entity-framework-2-2/
 [nswag_repo]:https://github.com/RicoSuter/NSwag
 [moq_repo]:https://github.com/moq/moq4
+[anglesharp]:https://anglesharp.github.io/

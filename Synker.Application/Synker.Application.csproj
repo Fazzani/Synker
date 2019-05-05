@@ -16,8 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DataSources\Commands\Delete\" />
-    <Folder Include="DataSources\Commands\Update\" />
     <Folder Include="Playlists\Commands\" />
     <Folder Include="Playlists\Queries\" />
   </ItemGroup>

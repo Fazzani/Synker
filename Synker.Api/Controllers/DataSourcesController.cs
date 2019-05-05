@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Synker.Api.Infrastructure;
 using Synker.Application.DataSources.Commands.Create;
+using Synker.Application.DataSources.Commands.Delete;
+using Synker.Application.DataSources.Commands.Update;
 using Synker.Application.DataSources.Queries.GetDatasource;
 using Synker.Application.DataSources.Queries.GetListDatasource;
 using System.Threading;
@@ -30,9 +32,30 @@ namespace Synker.Api.Controllers
         [ProducesResponseType(typeof(ListDatasourceViewModel), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Create([FromBody] CreateDataSourceCommand cmd, CancellationToken cancellationToken)
+        public async Task<IActionResult> Post([FromBody] CreateDataSourceCommand cmd, CancellationToken cancellationToken)
         {
             return Ok(await Mediator.Send(cmd, cancellationToken));
+        }
+
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Put([FromRoute] long id, [FromBody] UpdateDataSourceCommand cmd, CancellationToken cancellationToken)
+        {
+            cmd.Id = id;
+            await Mediator.Send(cmd, cancellationToken);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Delete(long id)
+        {
+            await Mediator.Send(new DeleteDataSourceCommand { Id = id });
+
+            return NoContent();
         }
     }
 }
