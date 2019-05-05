@@ -60,7 +60,9 @@ Inspired from [NorthwindTraders][NorthwindTraders]
    - Private fields mapping
    - Value Conversions
 
-## Go further
+## Go further & references
+
+Docs
 
 – [Clean Architecture][clean_archi]
 – [Onion Architecture][onion_archi]
