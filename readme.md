@@ -7,7 +7,7 @@ Inspired from [NorthwindTraders][NorthwindTraders]
 
 ### Schema
 
-![archi_clean](https://fullstackmark.com/img/posts/11/clean-architecture-circle-diagram.jpg)
+![archi_clean_diagram](https://fullstackmark.com/img/posts/11/clean-architecture-circle-diagram.jpg)
 
 ### Micro-services set
 
@@ -16,9 +16,9 @@ Inspired from [NorthwindTraders][NorthwindTraders]
   - Synchro (by playlist && by group)
   - Decorators
     - Cleaning names
-	- Auto grouping
-	- Shift time
-	- Custom && dynamique
+    - Auto grouping
+    - Shift time
+    - Custom && dynamic
 - EPG service
 - Picons service
 - Authentication Service (IDP)
