@@ -1,23 +1,21 @@
-# Docker build images && push them to Dockerhub
-
-name: $(Date:yyyyMMdd).$(Rev:.r)
-
 pool:
-  vmImage: ubuntu-16.04
-
-trigger:
-- master
-
+  name: Hosted Ubuntu 1604
 steps:
 - task: Docker@0
-  displayName: 'Build an image'
+  displayName: 'Build Synker Api image'
   inputs:
     containerregistrytype: 'Container Registry'
     dockerRegistryConnection: docker
+    defaultContext: false
+    context: '$(Build.SourcesDirectory)'
+    imageName: 'synker/synker_api:$(Build.BuildId)'
+    includeLatestTag: true
 
 - task: Docker@0
-  displayName: 'Push an image'
+  displayName: 'Push Synker image'
   inputs:
     containerregistrytype: 'Container Registry'
     dockerRegistryConnection: docker
     action: 'Push an image'
+    imageName: 'synker/synker_api:$(Build.BuildId)'
+    includeLatestTag: true

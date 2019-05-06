@@ -1,6 +1,7 @@
 # ![Synker API](logo.png)
 
 [![Build Status](https://dev.azure.com/henifazzani/SynkerAPI/_apis/build/status/SynkerAPI-CI?branchName=master)](https://dev.azure.com/henifazzani/SynkerAPI/_build/latest?definitionId=12&branchName=master)
+[![Build Status](https://dev.azure.com/henifazzani/SynkerAPI/_apis/build/status/SynkerAPI-Docker%20CI?branchName=master)](https://dev.azure.com/henifazzani/SynkerAPI/_build/latest?definitionId=14&branchName=master)
 
 ## Architecture (Clean architecture)
 
