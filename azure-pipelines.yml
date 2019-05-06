@@ -29,7 +29,7 @@ steps:
     organization: 'Fazzani'
     scannerMode: 'CLI'
     configMode: 'manual'
-    extraProperties: 'sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/**/CodeCoverage/coverage.opencover.xml'
+    extraProperties: 'sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/**/coverage.opencover.xml'
 
 - script: dotnet restore
   displayName: 'dotnet restore'
@@ -46,7 +46,7 @@ steps:
   inputs:
     command: test
     projects: 'Synker.Api.sln'
-    arguments: '-l trx -c $(buildConfiguration) -p:CollectCoverage=true -p:CoverletOutputFormat=opencover,cobertura'
+    arguments: '-l trx -c $(buildConfiguration) --results-directory ./results_tests -p:CollectCoverage=true -p:CoverletOutputFormat=\"opencover,cobertura\"'
     nobuild: true
 
 - task: DotNetCoreCLI@2
@@ -77,7 +77,7 @@ steps:
   displayName: 'Publish tests artifacts (trx)'
   inputs:
     testRunner: VSTest
-    testResultsFiles: '**/*.trx'
+    testResultsFiles: '**/results_tests/*.trx'
 
 - task: SonarCloudPublish@1
   displayName: 'Sonar Publish'
