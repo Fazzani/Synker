@@ -22,6 +22,7 @@ Inspired from [NorthwindTraders][NorthwindTraders]
     - Auto grouping
     - Shift time
     - Custom && dynamic
+- DataSources
 - EPG service
 - Picons service
 - Authentication Service (IDP)
