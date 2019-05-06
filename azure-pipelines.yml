@@ -50,11 +50,11 @@ steps:
     nobuild: true
 
 - task: DotNetCoreCLI@2
-    displayName: Install ReportGenerator Global Tool
-    inputs:
-      command: custom
-      custom: tool
-      arguments: install dotnet-reportgenerator-globaltool -g
+  displayName: Install ReportGenerator Global Tool
+  inputs:
+    command: custom
+    custom: tool
+    arguments: install dotnet-reportgenerator-globaltool -g
 
 # Generate the report using ReportGenerator (https://github.com/danielpalme/ReportGenerator)
 # First install the tool on the machine, then run it
