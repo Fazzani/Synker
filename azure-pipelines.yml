@@ -54,7 +54,7 @@ steps:
   inputs:
     command: custom
     custom: tool
-    arguments: install dotnet-reportgenerator-globaltool --tool-path /bin
+    arguments: install dotnet-reportgenerator-globaltool --tool-path ~/bin
 
 # Generate the report using ReportGenerator (https://github.com/danielpalme/ReportGenerator)
 # First install the tool on the machine, then run it
