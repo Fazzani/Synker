@@ -278,3 +278,4 @@ log/
 *docker-elk-serilog-*-buffer-*.json
 **/*livenessdb
 CodeCoverage/
+**/*.opencover.xml
