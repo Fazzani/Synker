@@ -25,8 +25,8 @@ steps:
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: '927afb1a-f6f6-430b-b477-a0007d55b46c'
-    organization: 'Fazzani-github'
-    projectKey: 'SynkerAPI'
+    organization: 'fazzani-githubb'
+    projectKey: 'Fazzani_Synker'
     projectName: 'SynkerAPI'
     extraProperties: | 
       sonar.cs.opencover.reportsPaths="$(Build.SourcesDirectory)/**/coverage.opencover.xml"
