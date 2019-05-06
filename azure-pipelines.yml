@@ -54,13 +54,12 @@ steps:
   inputs:
     command: custom
     custom: tool
-    arguments: install dotnet-reportgenerator-globaltool --tool-path ~/bin
+    arguments: install dotnet-reportgenerator-globaltool --tool-path .
 
 # Generate the report using ReportGenerator (https://github.com/danielpalme/ReportGenerator)
 # First install the tool on the machine, then run it
 - script: |
-    ls ~/bin
-    ~/bin/reportgenerator -reports:$(Build.SourcesDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/CodeCoverage -reporttypes:HtmlInline_AzurePipelines;Cobertura
+    ./reportgenerator -reports:$(Build.SourcesDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/CodeCoverage -reporttypes:HtmlInline_AzurePipelines;Cobertura
   displayName: Create Code coverage report
 
 # Publish the code coverage result (summary and web site)
@@ -77,7 +76,7 @@ steps:
   displayName: 'Publish tests artifacts (trx)'
   inputs:
     testRunner: VSTest
-    testResultsFiles: '**/results_tests/*.trx'
+    testResultsFiles: '**/*.trx'
 
 - task: SonarCloudPublish@1
   displayName: 'Sonar Publish'
