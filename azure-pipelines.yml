@@ -42,16 +42,35 @@ steps:
   displayName: 'dotnet test $(buildConfiguration)'
   inputs:
     command: test
-    projects: '*.sln'
+    projects: 'Synker.Api.sln'
     arguments: '-l trx -c $(buildConfiguration) -p:CollectCoverage=true -p:CoverletOutputFormat=cobertura'
     nobuild: true
 
+# Generate the report using ReportGenerator (https://github.com/danielpalme/ReportGenerator)
+# First install the tool on the machine, then run it
+- script: |
+    dotnet tool install -g dotnet-reportgenerator-globaltool
+    reportgenerator -reports:$(Build.SourcesDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/CodeCoverage -reporttypes:HtmlInline_AzurePipelines;Cobertura
+  displayName: Create Code coverage report
+
+# Publish the code coverage result (summary and web site)
+# The summary allows to view the coverage percentage in the summary tab
+# The web site allows to view which lines are covered directly in Azure Pipeline
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage'
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: '$(Build.SourcesDirectory)/CodeCoverage/Cobertura.xml'
+    reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage'
+
 - task: PublishTestResults@2
+  displayName: 'Publish tests artifacts (trx)'
   inputs:
     testRunner: VSTest
     testResultsFiles: '**/*.trx'
 
 - task: SonarCloudPublish@1
+  displayName: 'Sonar Publish'
   inputs:
     cliProjectKey: 'SynkerAPI'
     cliProjectName: 'SynkerAPI'
@@ -61,7 +80,7 @@ steps:
   inputs:
     command: publish
     projects: Synker.Api/Synker.Api.csproj
-    arguments: ' --no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    arguments: '--no-build -c $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: true
     publishWebProjects: false
     modifyOutputPath: true
