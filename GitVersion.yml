@@ -74,4 +74,3 @@ branches:
     track-merge-target: true
     tracks-release-branches: true
     is-release-branch: false
-track-merge-target: true
