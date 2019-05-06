@@ -4,9 +4,12 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AssemblyName>Synker.Domain</AssemblyName>
     <RootNamespace>Synker.Domain</RootNamespace>
+  </PropertyGroup>
+  
+  <PropertyGroup>
     <IsTestProject>false</IsTestProject>
   </PropertyGroup>
-
+  
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="8.3.0" />
   </ItemGroup>

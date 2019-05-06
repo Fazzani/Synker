@@ -3,6 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+  
+  <PropertyGroup>
     <IsTestProject>false</IsTestProject>
   </PropertyGroup>
 

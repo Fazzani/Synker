@@ -4,9 +4,12 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AssemblyName>Synker.Application</AssemblyName>
     <RootNamespace>Synker.Application</RootNamespace>
+  </PropertyGroup>
+  
+  <PropertyGroup>
     <IsTestProject>false</IsTestProject>
   </PropertyGroup>
-
+  
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.1.0" />
     <PackageReference Include="FluentValidation" Version="8.3.0" />

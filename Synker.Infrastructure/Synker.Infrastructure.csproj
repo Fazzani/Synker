@@ -2,9 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <IsTestProject>false</IsTestProject>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <IsTestProject>false</IsTestProject>
+  </PropertyGroup>
+  
   <ItemGroup>
     <ProjectReference Include="..\Synker.Application\Synker.Application.csproj" />
     <ProjectReference Include="..\Synker.Common\Synker.Common.csproj" />
