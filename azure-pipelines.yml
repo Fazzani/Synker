@@ -17,6 +17,8 @@ trigger:
 - master
 - develop
 - release/*
+- hotfix/*
+- feature/*
 
 variables:
   buildConfiguration: 'Release'
