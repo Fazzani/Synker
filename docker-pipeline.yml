@@ -1,0 +1,23 @@
+# Docker build images && push them to Dockerhub
+
+name: $(Date:yyyyMMdd).$(Rev:.r)
+
+pool:
+  vmImage: ubuntu-16.04
+
+trigger:
+- master
+
+steps:
+- task: Docker@0
+  displayName: 'Build an image'
+  inputs:
+    containerregistrytype: 'Container Registry'
+    dockerRegistryConnection: docker
+
+- task: Docker@0
+  displayName: 'Push an image'
+  inputs:
+    containerregistrytype: 'Container Registry'
+    dockerRegistryConnection: docker
+    action: 'Push an image'

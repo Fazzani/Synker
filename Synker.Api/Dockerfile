@@ -4,10 +4,10 @@ EXPOSE 80
 
 FROM microsoft/dotnet:2.2-sdk AS build
 WORKDIR /src
-COPY ["Synker.Api/Synker.Api.csproj", "Synker.Api/"]
-RUN dotnet restore "Synker.Api/Synker.Api.csproj"
+COPY ["Synker.Api.csproj", ""]
+RUN dotnet restore "Synker.Api.csproj"
 COPY . .
-WORKDIR "/src/Synker.Api"
+WORKDIR "/src/"
 RUN dotnet build "Synker.Api.csproj" -c Release -o /app
 
 FROM build AS publish
