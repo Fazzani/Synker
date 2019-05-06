@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<coverage line-rate="0,258" branch-rate="0,2" version="1.9" timestamp="1557136904" lines-covered="2138" lines-valid="8283" branches-covered="713" branches-valid="3565">
+<coverage line-rate="0,258" branch-rate="0,2" version="1.9" timestamp="1557137431" lines-covered="2138" lines-valid="8283" branches-covered="713" branches-valid="3565">
   <sources />
   <packages>
     <package name="Synker.Api" line-rate="0,913" branch-rate="0,897" complexity="33">

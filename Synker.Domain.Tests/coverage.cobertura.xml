@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<coverage line-rate="0,24" branch-rate="0,183" version="1.9" timestamp="1557136866" lines-covered="1724" lines-valid="7197" branches-covered="612" branches-valid="3350">
+<coverage line-rate="0,24" branch-rate="0,183" version="1.9" timestamp="1557137397" lines-covered="1724" lines-valid="7197" branches-covered="612" branches-valid="3350">
   <sources />
   <packages>
     <package name="Synker.Domain" line-rate="0,355" branch-rate="0,333" complexity="156">
