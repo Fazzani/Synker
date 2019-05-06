@@ -42,8 +42,8 @@ steps:
   displayName: 'dotnet test $(buildConfiguration)'
   inputs:
     command: test
-    projects: '**/*Tests/*.csproj'
-    arguments: '--logger trx --configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
+    projects: '*.sln'
+    arguments: '--logger trx --configuration $(buildConfiguration)'
     nobuild: true
 
 - task: PublishTestResults@2
