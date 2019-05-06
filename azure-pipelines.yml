@@ -25,12 +25,11 @@ steps:
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: '927afb1a-f6f6-430b-b477-a0007d55b46c'
-    cliProjectKey: 'SynkerAPI'
-    cliProjectName: 'SynkerAPI'
-    organization: 'Fazzani'
-    scannerMode: 'CLI'
-    configMode: 'manual'
-    extraProperties: 'sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/**/coverage.opencover.xml'
+    organization: 'Fazzani-github'
+    projectKey: 'SynkerAPI'
+    projectName: 'SynkerAPI'
+    extraProperties: | 
+      sonar.cs.opencover.reportsPaths="$(Build.SourcesDirectory)/**/coverage.opencover.xml"
 
 - script: dotnet restore
   displayName: 'dotnet restore'
@@ -79,11 +78,14 @@ steps:
     testRunner: VSTest
     testResultsFiles: '/home/vsts/work/**/*.trx'
 
+- task: SonarCloudAnalyze@1
+  displayName: 'Run Code Analysis'
+  # This will fail on PR builds https://go.microsoft.com/fwlink/?linkid=862029
+  continueOnError: true
+
 - task: SonarCloudPublish@1
-  displayName: 'Sonar Publish'
-  inputs:
-    cliProjectKey: 'SynkerAPI'
-    cliProjectName: 'SynkerAPI'
+  displayName: 'Publish Quality Gate Result'
+  continueOnError: true
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet publish $(buildConfiguration)'
