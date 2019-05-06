@@ -279,4 +279,7 @@ log/
 **/*livenessdb
 CodeCoverage/
 **/*.opencover.xml
+results_tests/
 **/*.trx
+**/coverage.cobertura.xml
+**/coverage.json
