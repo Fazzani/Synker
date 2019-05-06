@@ -43,7 +43,7 @@ steps:
   inputs:
     command: test
     projects: '*.sln'
-    arguments: '--logger trx --configuration $(buildConfiguration)'
+    arguments: '-l trx -c $(buildConfiguration) -p:CollectCoverage=true -p:CoverletOutputFormat=cobertura'
     nobuild: true
 
 - task: PublishTestResults@2
