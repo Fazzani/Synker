@@ -26,7 +26,7 @@ steps:
     SonarCloud: '927afb1a-f6f6-430b-b477-a0007d55b46c'
     cliProjectKey: 'SynkerAPI'
     cliProjectName: 'SynkerAPI'
-    organization: 'fazzani-github'
+    organization: 'Fazzani'
     scannerMode: 'CLI'
     configMode: 'manual'
     extraProperties: 'sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/**/coverage/coverage.opencover.xml'
@@ -54,10 +54,7 @@ steps:
   inputs:
     command: custom
     custom: tool
-    arguments: install dotnet-reportgenerator-globaltool -g
-    
-- script: "echo '##vso[task.prependpath]$HOME/.dotnet/tools'"
-  displayName: 'add dotnet tools to the PATH'
+    arguments: install dotnet-reportgenerator-globaltool --tool-path /bin
 
 # Generate the report using ReportGenerator (https://github.com/danielpalme/ReportGenerator)
 # First install the tool on the machine, then run it
