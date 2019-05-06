@@ -12,9 +12,9 @@ steps:
     gitHubConnection: 'GitHub'
     action: 'create'
     tagSource: 'manual'
-    tag: 'v$(GitVersion.NuGetVersionV2)'
-    title: 'v$(GitVersion.NuGetVersionV2)'
-    isPreRelease: contains(variables['GitVersion.NuGetVersionV2'], '-')
+    tag: 'v$(GitVersion.SemVer)'
+    title: 'v$(GitVersion.SemVer)'
+    isPreRelease: contains(variables['GitVersion.SemVer'], '-')
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 
 - task: Docker@0
@@ -24,7 +24,7 @@ steps:
     dockerRegistryConnection: docker
     defaultContext: false
     context: '$(Build.SourcesDirectory)'
-    imageName: 'synker/synker_api:$((GitVersion.NuGetVersionV2)'
+    imageName: 'synker/synker_api:$(GitVersion.SemVer)'
     includeLatestTag: true
 
 - task: Docker@0
@@ -33,5 +33,5 @@ steps:
     containerregistrytype: 'Container Registry'
     dockerRegistryConnection: docker
     action: 'Push an image'
-    imageName: 'synker/synker_api:$((GitVersion.NuGetVersionV2)'
+    imageName: 'synker/synker_api:$(GitVersion.SemVer)'
     includeLatestTag: true
