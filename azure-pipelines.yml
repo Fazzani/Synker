@@ -46,7 +46,7 @@ steps:
   inputs:
     command: test
     projects: 'Synker.Api.sln'
-    arguments: '-l trx -c $(buildConfiguration) -p:CollectCoverage=true -p:CoverletOutputFormat="opencover,cobertura"'
+    arguments: '-l trx -c $(buildConfiguration) -p:CollectCoverage=true -p:CoverletOutputFormat=opencover,cobertura'
     nobuild: true
 
 - task: DotNetCoreCLI@2
