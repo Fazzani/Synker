@@ -11,7 +11,6 @@
     {
         public Playlist()
         {
-            //PlaylistDataSources = new HashSet<PlaylistDataSource>();
             Medias = new HashSet<Media>();
         }
 
@@ -20,8 +19,6 @@
         public OnlineState State { get; set; }
 
         public User User { get; set; }
-
-        //public ICollection<PlaylistDataSource> PlaylistDataSources { get; }
 
         public ICollection<Media> Medias { get; } //TODO: shadow property and pass it to private scope
 

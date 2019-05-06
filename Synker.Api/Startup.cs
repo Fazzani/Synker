@@ -45,7 +45,7 @@ namespace Synker.Api
             //Some problems with the SynkerDBContext migration
             services.AddBeatPulseUI();
 
-            services.AddMediatR(typeof(GetDataSourceQueryHandler).GetTypeInfo().Assembly);
+            services.AddMediatR(typeof(GetDataSourceQuery).GetTypeInfo().Assembly);
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
 
             services.AddTransient<INotificationService, NotificationService>();

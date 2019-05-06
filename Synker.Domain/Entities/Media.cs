@@ -94,7 +94,7 @@
 
         /// <summary>
         /// Add only knowned attributes
-        /// avoid duplicated
+        /// avoid duplicated label
         /// avoid null key 
         /// </summary>
         public void AddNewLabel(Label label)

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Synker.Api.Infrastructure;
+using Synker.Application.Playlists.Queries;
 
 namespace Synker.Api.Controllers
 {
@@ -18,12 +19,12 @@ namespace Synker.Api.Controllers
         //    return Ok(await Mediator.Send(query, cancellationToken));
         //}
 
-        //[HttpGet("{id}")]
-        //[ProducesResponseType(typeof(PlaylistViewModel), StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status404NotFound)]
-        //public async Task<IActionResult> Get(long id, CancellationToken cancellationToken)
-        //{
-        //    return Ok(await Mediator.Send(new GetPlaylistQuery { Id = id }, cancellationToken));
-        //}
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(PlaylistViewModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Get(long id, CancellationToken cancellationToken)
+        {
+            return Ok(await Mediator.Send(new GetPlaylistQuery { Id = id }, cancellationToken));
+        }
     }
 }

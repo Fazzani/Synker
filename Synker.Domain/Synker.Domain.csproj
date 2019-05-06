@@ -9,9 +9,5 @@
   <PropertyGroup>
     <IsTestProject>false</IsTestProject>
   </PropertyGroup>
-  
-  <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="8.3.0" />
-  </ItemGroup>
 
 </Project>
