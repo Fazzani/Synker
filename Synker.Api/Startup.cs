@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using BeatPulse.UI;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,25 +8,23 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using NSwag;
 using Synker.Api.Filters;
-using Synker.Application.DataSources.Queries;
+using Synker.Application.DataSources.Commands.Create;
 using Synker.Application.DataSources.Queries.GetDatasource;
 using Synker.Application.Infrastructure.AutoMapper;
 using Synker.Application.Infrastructure.FluentValidationBehaviors;
 using Synker.Application.Interfaces;
 using Synker.Infrastructure;
 using Synker.Persistence;
-using Synker.Application.DataSources.Commands.Create;
-using FluentValidation.AspNetCore;
+using System;
+using System.Reflection;
 
 namespace Synker.Api
 {
     public class Startup
     {
-        public static string AssemblyVersion = typeof(Startup).GetTypeInfo().Assembly.GetCustomAttribute<AssemblyFileVersionAttribute>().Version;
+        public volatile static string AssemblyVersion = typeof(Startup).GetTypeInfo().Assembly.GetCustomAttribute<AssemblyFileVersionAttribute>().Version;
 
         public Startup(IConfiguration configuration)
         {
@@ -62,9 +56,9 @@ namespace Synker.Api
                 sqlOptions =>
                 {
                     sqlOptions.MigrationsAssembly(typeof(SynkerDbContext).GetTypeInfo().Assembly.GetName().Name);
-                        //Configuring Connection Resiliency:
-                        sqlOptions.
-                        EnableRetryOnFailure(3, TimeSpan.FromSeconds(30), null);
+                    //Configuring Connection Resiliency:
+                    sqlOptions.
+                    EnableRetryOnFailure(3, TimeSpan.FromSeconds(30), null);
                 });
 
                 //// Changing default behavior when client evaluation occurs to throw.
