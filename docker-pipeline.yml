@@ -1,6 +1,22 @@
 pool:
   name: Hosted Ubuntu 1604
 steps:
+
+- task: GitVersion@4
+  displayName: 'GitVersion'
+  inputs:
+    updateAssemblyInfo: true
+
+- task: GitHubRelease@0
+  inputs:
+    gitHubConnection: 'GitHub'
+    action: 'create'
+    tagSource: 'manual'
+    tag: 'v$(GitVersion.NuGetVersionV2)'
+    title: 'v$(GitVersion.NuGetVersionV2)'
+    isPreRelease: contains(variables['GitVersion.NuGetVersionV2'], '-')
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+
 - task: Docker@0
   displayName: 'Build Synker Api image'
   inputs:
@@ -8,7 +24,7 @@ steps:
     dockerRegistryConnection: docker
     defaultContext: false
     context: '$(Build.SourcesDirectory)'
-    imageName: 'synker/synker_api:$(Build.BuildId)'
+    imageName: 'synker/synker_api:$((GitVersion.NuGetVersionV2)'
     includeLatestTag: true
 
 - task: Docker@0
@@ -17,5 +33,5 @@ steps:
     containerregistrytype: 'Container Registry'
     dockerRegistryConnection: docker
     action: 'Push an image'
-    imageName: 'synker/synker_api:$(Build.BuildId)'
+    imageName: 'synker/synker_api:$((GitVersion.NuGetVersionV2)'
     includeLatestTag: true
