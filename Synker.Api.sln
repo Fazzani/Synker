@@ -11,9 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synker.Application", "Synke
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{4BDEB2A4-8751-4710-91D4-7B1067B79AE0}"
 	ProjectSection(SolutionItems) = preProject
-		azure-pipelines.yml = azure-pipelines.yml
-		docker-pipeline.yml = docker-pipeline.yml
-		GitVersion.yml = GitVersion.yml
 		README.md = README.md
 		docs\Slides.pdf = docs\Slides.pdf
 	EndProjectSection
@@ -40,6 +37,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.dockerignore = .dockerignore
 		.gitignore = .gitignore
+		azure-pipelines.yml = azure-pipelines.yml
+		docker-pipeline.yml = docker-pipeline.yml
+		GitVersion.yml = GitVersion.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synker.Application.Tests", "Synker.Application.Tests\Synker.Application.Tests.csproj", "{5531D94B-C281-46E1-BA5A-65F5973375C7}"

@@ -55,7 +55,7 @@ namespace Synker.Persistence
                 User = Users[1],
                 Name = "dsm3u",
                 Uri = UriAddress.For("http://tests.synker.ovh/m3u"),
-                CreatedDate= DateTime.UtcNow.AddDays(-2)
+                CreatedDate = DateTime.UtcNow.AddDays(-2)
             });
 
             DataSources.Add(0, new M3uPlaylistDataSource
@@ -64,22 +64,45 @@ namespace Synker.Persistence
                 Name = "dsm3u_2",
                 Uri = UriAddress.For("http://tests.synker.ovh/m3u1"),
                 State = OnlineState.Disabled,
-                CreatedDate= DateTime.UtcNow.AddMonths(-5)
+                CreatedDate = DateTime.UtcNow.AddMonths(-5)
             });
 
             DataSources.Add(2, new XtreamPlaylistDataSource
             {
                 User = Users[1],
                 Name = "ds_xt_1",
-                CreatedDate= DateTime.UtcNow.AddMinutes(-13)
+                CreatedDate = DateTime.UtcNow.AddMinutes(-13)
             });
 
             DataSources.Add(3, new XtreamPlaylistDataSource
             {
                 User = Users[2],
                 Name = "ds_xt_2",
-                CreatedDate= DateTime.UtcNow.AddYears(-2)
+                CreatedDate = DateTime.UtcNow.AddYears(-2)
             });
+
+            for (int i = 4, j = 23; i < 23; i++, j++)
+            {
+                var id = i % Users.Keys.Count;
+
+                DataSources.Add(i, new M3uPlaylistDataSource
+                {
+                    User = Users[id],
+                    Name = $"ds_{DateTime.Now}_{i}",
+                    CreatedDate = DateTime.UtcNow.AddYears(-i),
+                    State = i % 2 == 0 ? OnlineState.Disabled : OnlineState.Enabled,
+                    Uri = UriAddress.For($"http://tests.synker.ovh/m3u{i}"),
+                });
+
+                DataSources.Add(j, new XtreamPlaylistDataSource
+                {
+                    User = Users[id],
+                    Name = $"ds_{DateTime.Now}_{j}",
+                    CreatedDate = DateTime.UtcNow.AddYears(-j),
+                    State = j % 2 == 0 ? OnlineState.Disabled : OnlineState.Enabled,
+                    Authentication = new BasicAuthentication($"user{j}", $"pass{j}")
+                });
+            }
 
             foreach (var ds in DataSources.Values)
             {
@@ -91,6 +114,7 @@ namespace Synker.Persistence
 
         private void SeedUsers(SynkerDbContext context)
         {
+            Users.Add(0, new User { Email = "webmaster@synker.ovh" });
             Users.Add(1, new User { Email = "support@synker.ovh" });
             Users.Add(2, new User { Email = "tunisienheni@gmail.com" });
             Users.Add(3, new User { Email = "test@synker.ovh" });
