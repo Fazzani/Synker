@@ -7,10 +7,11 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
+using Xunit.Extensions.Ordering;
 
 namespace Synker.Api.FunctionalTests.Tests.DataSources
 {
-    [Collection("DataSource")]
+    [Collection(nameof(DataSourceCollection))]
     public class GetListTest : IClassFixture<CustomWebApplicationFactory<Startup>>
     {
         private readonly HttpClient _client;

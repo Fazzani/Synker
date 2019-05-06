@@ -1,15 +1,13 @@
 ﻿using Shouldly;
 using Synker.Application.Playlists.Queries;
-using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using Xunit.Extensions.Ordering;
 
 namespace Synker.Api.FunctionalTests.Tests.Playlists
 {
-    [Collection("Playlist")]
+    [Collection(nameof(PlaylistCollection))]
     public class GetTest : IClassFixture<CustomWebApplicationFactory<Startup>>
     {
         private readonly HttpClient _client;
@@ -19,7 +17,7 @@ namespace Synker.Api.FunctionalTests.Tests.Playlists
             _client = factory.CreateClient();
         }
 
-        [Fact]
+        [Fact, Order(0)]
         public async Task Get_Playlist_Ok()
         {
             var httpResponse = await _client.GetAsync("/api/1.0/playlists/1");
@@ -34,7 +32,7 @@ namespace Synker.Api.FunctionalTests.Tests.Playlists
             ds.Id.ShouldBe(1);
         }
 
-        [Fact]
+        [Fact, Order(1)]
         public async Task Get_Not_FoundException()
         {
             var httpResponse = await _client.GetAsync("/api/1.0/playlists/1000");

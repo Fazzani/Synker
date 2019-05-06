@@ -3,10 +3,11 @@ using Synker.Application.DataSources.Queries.GetDatasource;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
+using Xunit.Extensions.Ordering;
 
 namespace Synker.Api.FunctionalTests.Tests.DataSources
 {
-    [Collection("DataSource")]
+    [Collection(nameof(DataSourceCollection))]
     public class GetTest : IClassFixture<CustomWebApplicationFactory<Startup>>
     {
         private readonly HttpClient _client;
@@ -16,7 +17,7 @@ namespace Synker.Api.FunctionalTests.Tests.DataSources
             _client = factory.CreateClient();
         }
 
-        [Fact]
+        [Fact, Order(0)]
         public async Task Get_DataSource_Ok()
         {
             var httpResponse = await _client.GetAsync("/api/1.0/datasources/1");
@@ -31,7 +32,7 @@ namespace Synker.Api.FunctionalTests.Tests.DataSources
             ds.Id.ShouldBe(1);
         }
 
-        [Fact]
+        [Fact, Order(1)]
         public async Task Get_Not_FoundException()
         {
             var httpResponse = await _client.GetAsync("/api/1.0/datasources/1000");
