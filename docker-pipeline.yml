@@ -15,16 +15,6 @@ steps:
   inputs:
     updateAssemblyInfo: true
 
-- task: GitHubRelease@0
-  inputs:
-    gitHubConnection: 'GitHub'
-    action: 'create'
-    tagSource: 'manual'
-    tag: 'v$(GitVersion.SemVer)'
-    title: 'v$(GitVersion.SemVer)'
-    isPreRelease: contains(variables['GitVersion.SemVer'], '-')
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-
 - task: Docker@0
   displayName: 'Build Synker Api image'
   inputs:
@@ -43,3 +33,13 @@ steps:
     action: 'Push an image'
     imageName: 'synker/synker_api:$(GitVersion.SemVer)'
     includeLatestTag: true
+
+- task: GitHubRelease@0
+  inputs:
+    gitHubConnection: 'GitHub'
+    action: 'create'
+    tagSource: 'manual'
+    tag: 'v$(GitVersion.SemVer)'
+    title: 'v$(GitVersion.SemVer)'
+    isPreRelease: contains(variables['GitVersion.SemVer'], '-')
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
