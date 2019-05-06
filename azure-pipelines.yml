@@ -25,7 +25,7 @@ steps:
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: '927afb1a-f6f6-430b-b477-a0007d55b46c'
-    organization: 'fazzani-githubb'
+    organization: 'fazzani-github'
     projectKey: 'Fazzani_Synker'
     projectName: 'SynkerAPI'
     extraProperties: | 
