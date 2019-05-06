@@ -279,3 +279,4 @@ log/
 **/*livenessdb
 CodeCoverage/
 **/*.opencover.xml
+**/*.trx
