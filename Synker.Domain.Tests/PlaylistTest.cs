@@ -45,8 +45,6 @@ namespace Synker.Domain.Tests
             var pl = new Playlist();
             pl.AddMedia(new Media { Id = 1, DisplayName = "name", Position = -1, Url = UriAddress.For("http://pl1.synker.ovh") });
             pl.AddMedia(new Media { Id = 2, DisplayName = "name2", Position = -1, Url = UriAddress.For("http://pl.synker.ovh") });
-            pl.RemoveMedia(3);
-
             Should.Throw<MediaNotFoundException>(() => pl.RemoveMedia(3));
         }
     }
