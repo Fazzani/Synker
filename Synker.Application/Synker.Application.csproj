@@ -20,9 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Playlists\Commands\Create\" />
-    <Folder Include="Playlists\Commands\Delete\" />
-    <Folder Include="Playlists\Commands\Update\" />
     <Folder Include="Playlists\Queries\GetListPlaylist\" />
   </ItemGroup>
 

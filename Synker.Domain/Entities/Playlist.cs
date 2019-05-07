@@ -50,6 +50,43 @@
             Medias.Add(media);
         }
 
+        public bool TryAddMedia(Media media, out List<ValidationResult> validationResults)
+        {
+            validationResults = new List<ValidationResult>();
+
+            if (!Validator.TryValidateObject(media, new ValidationContext(media), validationResults, true))
+            {
+                return false;
+            }
+
+            if (Medias.Any(x => x.Equals(media)))
+            {
+                validationResults.Add(new ValidationResult(new DuplicatedPlaylistMediaException(media, this).Message));
+                return false;
+            }
+
+            if (media.Position == -1)
+            {
+                media.Position = Medias.Count > 0 ? Medias.Max(x => x.Position) + 1 : 0;
+            }
+            else
+            {
+                if (Medias.Any(x => x.Position == media.Position))
+                {
+                    validationResults.Add(new ValidationResult(new MediaSomePositionException(media, this).Message));
+                    return false;
+                }
+            }
+
+            Medias.Add(media);
+            return true;
+        }
+
+        public void AddRangeMedia(List<Media> medias)
+        {
+            medias.ForEach(AddMedia);
+        }
+
         public bool RemoveMedia(long mediaId)
         {
             if (!Medias.Any(x => x.Id == mediaId))

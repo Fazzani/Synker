@@ -1,11 +1,13 @@
 namespace Synker.Domain.Tests
 {
+    using Shouldly;
     using Synker.Domain.Entities;
     using Synker.Domain.Entities.Core;
     using Synker.Domain.Exceptions;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using Xunit;
-    using Shouldly;
 
     public class PlaylistTest
     {
@@ -27,6 +29,28 @@ namespace Synker.Domain.Tests
 
             Should.Throw<MediaSomePositionException>(() =>
             pl.AddMedia(new Media { Id = 2, DisplayName = "name2", Position = 1, Url = UriAddress.For("http://pl.synker.ovh") }));
+        }
+
+        [Fact]
+        public void TryAddMedia_Two_media_should_not_the_some_position()
+        {
+            var pl = new Playlist();
+            var media = new Media
+            {
+                Id = 1,
+                DisplayName = "name",
+                Position = 1,
+                Url = UriAddress.For("http://pl1.synker.ovh")
+            };
+
+            var result1 = pl.TryAddMedia(media, out List<ValidationResult> validationResult);
+
+            result1.ShouldBe(true);
+            validationResult.ShouldBeEmpty();
+
+            var result = pl.TryAddMedia(media, out List<ValidationResult> validationResult2);
+            result.ShouldBe(false);
+            validationResult2.ShouldNotBeEmpty();
         }
 
         [Fact]
