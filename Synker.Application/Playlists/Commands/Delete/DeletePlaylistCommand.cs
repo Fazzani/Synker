@@ -28,7 +28,7 @@
 
                 if (entity == null)
                 {
-                    throw new NotFoundException(nameof(Playlist), entity.Id);
+                    throw new NotFoundException(nameof(Playlist), request.Id);
                 }
 
                 _context.Playlists.Remove(entity);

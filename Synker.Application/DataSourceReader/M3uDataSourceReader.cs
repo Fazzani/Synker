@@ -53,8 +53,6 @@
                 while ((line = await stringReader.ReadLineAsync()) != null)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
-                    if (string.IsNullOrWhiteSpace(line))
-                        continue;
 
                     if (line != string.Empty && line.StartsWith(HeaderUrl))
                     {
