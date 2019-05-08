@@ -33,6 +33,22 @@
             return uriAddress;
         }
 
+        public static bool TryFor(string url, out UriAddress uriAddress)
+        {
+            uriAddress = new UriAddress();
+
+            try
+            {
+                uriAddress.Uri = new Uri(url);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public Uri Uri { get; private set; }
 
         protected override IEnumerable<object> GetAtomicValues()

@@ -19,6 +19,7 @@ using Synker.Infrastructure;
 using Synker.Persistence;
 using System;
 using System.Reflection;
+using Xtream.Client;
 
 namespace Synker.Api
 {
@@ -50,6 +51,9 @@ namespace Synker.Api
 
             services.AddTransient<INotificationService, NotificationService>();
 
+            services.AddTransient<IDataSourceReaderFactory, DefaultDataSourceReaderFactory>();
+            services.AddTransient<IXtreamClient, XtreamClient>();
+            
             services.AddDbContext<ISynkerDbContext, SynkerDbContext>(options =>
             {
                 options.UseNpgsql(Configuration.GetConnectionString("PlDatabase"),

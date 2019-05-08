@@ -87,14 +87,14 @@
             medias.ForEach(AddMedia);
         }
 
-        public bool RemoveMedia(long mediaId)
+        public bool RemoveMedia(long id)
         {
-            if (!Medias.Any(x => x.Id == mediaId))
+            if (!Medias.Any(x => x.Id == id))
             {
-                throw new MediaNotFoundException(mediaId, this);
+                throw new MediaNotFoundException(id, this);
             }
 
-            return Medias.Remove(Medias.First(x => x.Id == mediaId));
+            return Medias.Remove(Medias.First(x => x.Id == id));
         }
     }
 }
