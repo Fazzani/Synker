@@ -3,6 +3,7 @@
     using AutoMapper;
     using Synker.Application.Interfaces.Mapping;
     using Synker.Domain.Entities;
+    using Synker.Domain.Entities.Core;
     using System;
     using System.Linq.Expressions;
 
@@ -19,7 +20,7 @@
         public void CreateMappings(Profile configuration)
         {
             configuration.CreateMap<PlaylistDataSource, DatasourceLookupViewModel>()
-                  .ForMember(x => x.Enabled, opt => opt.MapFrom(m => m.State == Domain.Entities.Core.OnlineState.Enabled));
+                  .ForMember(x => x.Enabled, opt => opt.MapFrom(m => m.State == OnlineState.Enabled));
         }
 
         public static Expression<Func<PlaylistDataSource, DatasourceLookupViewModel>> Projection
@@ -30,7 +31,7 @@
                 {
                     Id = ds.Id,
                     Name = ds.Name,
-                    Enabled = ds.State == Domain.Entities.Core.OnlineState.Enabled,
+                    Enabled = ds.State == OnlineState.Enabled,
                     PlaylistDataSourceFormat = ds.PlaylistDataSourceFormat
                 };
             }

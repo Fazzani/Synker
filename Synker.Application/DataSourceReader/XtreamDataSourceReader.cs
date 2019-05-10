@@ -27,9 +27,10 @@ namespace Synker.Application.DataSourceReader
 
         public async Task<List<Media>> GetMediasAsync(CancellationToken cancellationToken = default)
         {
-            var panelInfo = await _xtreamClient.GetPanelAsync(cancellationToken);
+            var connectionInfo = _dataSource.GetConnection();
+            var panelInfo = await _xtreamClient.GetPanelAsync(connectionInfo,  cancellationToken);
 
-            var medias = await _xtreamClient.GetLiveStreamsAsync(cancellationToken);
+            var medias = await _xtreamClient.GetLiveStreamsAsync(connectionInfo, cancellationToken);
 
             return medias.Select(x => new
             {

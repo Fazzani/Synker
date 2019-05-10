@@ -53,6 +53,7 @@ namespace Synker.Api
 
             services.AddTransient<IDataSourceReaderFactory, DefaultDataSourceReaderFactory>();
             services.AddTransient<IXtreamClient, XtreamClient>();
+            services.AddTransient<IHttpClientFactory, DefaultHttpClientFactory>();
             
             services.AddDbContext<ISynkerDbContext, SynkerDbContext>(options =>
             {

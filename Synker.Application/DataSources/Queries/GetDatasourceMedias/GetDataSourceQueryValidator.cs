@@ -1,11 +1,11 @@
 ﻿namespace Synker.Application.DataSources.Queries
 {
     using FluentValidation;
-    public class GetDataSourceMediasQueryValidator : AbstractValidator<GetDataSourceMediasQuery>
+    public class GetDataSourceMediasQueryValidator : AbstractValidator<DataSourceMediasQuery>
     {
         public GetDataSourceMediasQueryValidator()
         {
-            RuleFor(x => x.Id).GreaterThan(-1);
+            RuleFor(x => x.DataSourceId).GreaterThan(-1);
         }
     }
 }

@@ -26,13 +26,14 @@ namespace Synker.Application.Tests.DataReaders
             var mockHttpClientFactory = new Mock<IHttpClientFactory>();
             MockHttpClient(mockHttpClientFactory, panelJsonData);
 
-            var xtreamJsonReader = new XtreamJsonReader(mockHttpClientFactory.Object, new XtBasicConnectionFactory("http://server.tes", "", ""));
-            var panel = await xtreamJsonReader.GetFromApi<XtreamPanel>(XtreamApiEnum.Panel_Api, CancellationToken.None);
+            var xtreamJsonReader = new XtreamJsonReader(mockHttpClientFactory.Object);
+            var connectionInfo = new XtBasicConnectionFactory("http://server.tes", "", "").Create();
+            var panel = await xtreamJsonReader.GetFromApi<XtreamPanel>(connectionInfo, XtreamApiEnum.Panel_Api, CancellationToken.None);
 
             var mockXtreamClient = new Mock<IXtreamClient>();
-            mockXtreamClient.Setup(x => x.GetPanelAsync(CancellationToken.None)).ReturnsAsync(panel);
-            mockXtreamClient.Setup(x => x.GetLiveStreamsAsync(CancellationToken.None)).ReturnsAsync(panel.Available_Channels);
-            mockXtreamClient.Setup(x => x.GetLiveCategoriesAsync(CancellationToken.None)).ReturnsAsync(panel.Categories.Live);
+            mockXtreamClient.Setup(x => x.GetPanelAsync(connectionInfo, CancellationToken.None)).ReturnsAsync(panel);
+            mockXtreamClient.Setup(x => x.GetLiveStreamsAsync(connectionInfo, CancellationToken.None)).ReturnsAsync(panel.Available_Channels);
+            mockXtreamClient.Setup(x => x.GetLiveCategoriesAsync(connectionInfo, CancellationToken.None)).ReturnsAsync(panel.Categories.Live);
 
             var ds = new XtreamPlaylistDataSource
             {

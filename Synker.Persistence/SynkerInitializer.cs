@@ -50,13 +50,6 @@ namespace Synker.Persistence
 
         private void SeedDataSources(SynkerDbContext context)
         {
-            DataSources.Add(1, new M3uPlaylistDataSource
-            {
-                User = Users[1],
-                Name = "dsm3u",
-                Uri = UriAddress.For("http://tests.synker.ovh/m3u"),
-                CreatedDate = DateTime.UtcNow.AddDays(-2)
-            });
 
             DataSources.Add(0, new M3uPlaylistDataSource
             {
@@ -65,6 +58,14 @@ namespace Synker.Persistence
                 Uri = UriAddress.For("http://tests.synker.ovh/m3u1"),
                 State = OnlineState.Disabled,
                 CreatedDate = DateTime.UtcNow.AddMonths(-5)
+            });
+
+            DataSources.Add(1, new M3uPlaylistDataSource
+            {
+                User = Users[1],
+                Name = "dsm3u",
+                Uri = UriAddress.For("http://tests.synker.ovh/m3u"),
+                CreatedDate = DateTime.UtcNow.AddDays(-2)
             });
 
             DataSources.Add(2, new XtreamPlaylistDataSource
@@ -78,7 +79,9 @@ namespace Synker.Persistence
             {
                 User = Users[2],
                 Name = "ds_xt_2",
-                CreatedDate = DateTime.UtcNow.AddYears(-2)
+                CreatedDate = DateTime.UtcNow.AddYears(-2),
+                Authentication = new BasicAuthentication("user", "pass"),
+                Server = UriAddress.For("http://synkertest.fr")
             });
 
             for (int i = 4, j = 23; i < 23; i++, j++)
@@ -104,7 +107,7 @@ namespace Synker.Persistence
                 });
             }
 
-            foreach (var ds in DataSources.Values)
+            foreach (var ds in DataSources.OrderBy(x => x.Key).Select(x => x.Value))
             {
                 context.PlaylistDataSources.Add(ds);
             }
