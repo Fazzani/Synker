@@ -1,14 +1,11 @@
 ﻿using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Moq;
-using Moq.Protected;
 using Shouldly;
 using Synker.Application.DataSources.Queries;
 using System;
 using System.Net;
 using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
 using Xtream.Client;
 using Xunit;
@@ -37,7 +34,7 @@ namespace Synker.Api.FunctionalTests.Tests.DataSources
         public async Task MediaList_DataSource_Not_Found()
         {
             var httpResponse = await _client.PostAsJsonAsync("/api/1.0/datasources/1111/medias", new DataSourceMediasQuery { DataSourceId = 1 });
-            httpResponse.StatusCode.ShouldBe(System.Net.HttpStatusCode.NotFound);
+            httpResponse.StatusCode.ShouldBe(HttpStatusCode.NotFound);
         }
 
         [Fact]
@@ -55,6 +52,5 @@ namespace Synker.Api.FunctionalTests.Tests.DataSources
             httpResponse.StatusCode.ShouldBe(HttpStatusCode.InternalServerError);
             httpResponse.ReasonPhrase.Equals("Xtream connection info error (Server can't be null)", StringComparison.InvariantCultureIgnoreCase);
         }
-
     }
 }

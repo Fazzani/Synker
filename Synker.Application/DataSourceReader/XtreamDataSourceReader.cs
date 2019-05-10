@@ -32,6 +32,9 @@ namespace Synker.Application.DataSourceReader
 
             var medias = await _xtreamClient.GetLiveStreamsAsync(connectionInfo, cancellationToken);
 
+            if (medias == null)
+                return null;
+
             return medias.Select(x => new
             {
                 success = UriAddress.TryFor(panelInfo.GenerateUrlFrom(x), out UriAddress uriAddress),
