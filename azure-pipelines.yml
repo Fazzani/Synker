@@ -1,7 +1,7 @@
 # Inspired from https://www.meziantou.net/2019/02/18/computing-code-coverage-for-a-net-core-project-with-azure-devops-and-coverlet
 # and https://github.com/wulfland/code-coverage-sample/blob/master/azure-pipelines.yml
 
-name: $(Date:yyyyMMdd).$(Rev:.r)
+name: $(Date:yyyyMMdd)$(Rev:.r)
 
 strategy:
   matrix:
