@@ -130,8 +130,8 @@
 
         public static class KnowedLabelKeys
         {
-            public static string GroupKey = "media_group";
-            public static string Lang = "media_lang";
+            public const string GroupKey = "media_group";
+            public const string Lang = "media_lang";
         }
     }
 

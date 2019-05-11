@@ -91,30 +91,13 @@
                 {
                     var value = tabTags[1].Replace("\"", "");
 
-                    if (item.Trim().StartsWith("tvg-id"))
+                    channel.Tvg.Id = item.Trim().StartsWith("tvg-id") ? value : channel.Tvg.Id;
+                    channel.Tvg.Logo = item.Trim().StartsWith("tvg-logo") ? value : channel.Tvg.Logo;
+                    channel.Tvg.Name = item.Trim().StartsWith("tvg-name") ? value : channel.Tvg.Name;
+
+                    if (item.Trim().StartsWith("group-title"))
                     {
-                        channel.Tvg.Id = value;
-                    }
-                    else
-                    {
-                        if (item.Trim().StartsWith("tvg-logo"))
-                        {
-                            channel.Tvg.Logo = value;
-                        }
-                        else
-                        {
-                            if (item.Trim().StartsWith("tvg-name"))
-                            {
-                                channel.Tvg.Name = value;
-                            }
-                            else
-                            {
-                                if (item.Trim().StartsWith("group-title"))
-                                {
-                                    channel.Labels.Add(new Label { Key = Media.KnowedLabelKeys.GroupKey, Value = value });
-                                }
-                            }
-                        }
+                        channel.Labels.Add(new Label { Key = Media.KnowedLabelKeys.GroupKey, Value = value });
                     }
                 }
             }
