@@ -40,7 +40,7 @@ namespace Synker.Api.FunctionalTests.Tests.DataSources
         }
 
         [Fact]
-        public async Task MediaList_DataSource_Ok()
+        public async Task MediaList_XtreamDataSource_Ok()
         {
             var httpResponse = await _client.PostAsJsonAsync("/api/1.0/datasources/4/medias", new DataSourceMediasQuery { DataSourceId = 1 });
             httpResponse.EnsureSuccessStatusCode();
@@ -49,6 +49,21 @@ namespace Synker.Api.FunctionalTests.Tests.DataSources
             var ds = await Utilities.GetResponseContent<PagedResult<DataSourceMediasViewModel>>(httpResponse);
             ds.ShouldNotBeNull();
             ds.RowCount.ShouldBe(15);
+            ds.Results.Count.ShouldBe(10);
+
+            ds.Results.ShouldSatisfyAllConditions(() => ds.Results.Any(x => !string.IsNullOrEmpty(x.Picon)));
+        }
+
+        [Fact]
+        public async Task MediaList_M3uDataSource_Ok()
+        {
+            var httpResponse = await _client.PostAsJsonAsync("/api/1.0/datasources/2/medias", new DataSourceMediasQuery { DataSourceId = 1 });
+            httpResponse.EnsureSuccessStatusCode();
+            httpResponse.StatusCode.ShouldBe(HttpStatusCode.OK);
+
+            var ds = await Utilities.GetResponseContent<PagedResult<DataSourceMediasViewModel>>(httpResponse);
+            ds.ShouldNotBeNull();
+            ds.RowCount.ShouldBe(96);
             ds.Results.Count.ShouldBe(10);
 
             ds.Results.ShouldSatisfyAllConditions(() => ds.Results.Any(x => !string.IsNullOrEmpty(x.Picon)));

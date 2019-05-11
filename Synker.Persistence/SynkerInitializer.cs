@@ -64,7 +64,7 @@ namespace Synker.Persistence
             {
                 User = Users[1],
                 Name = "dsm3u",
-                Uri = UriAddress.For("http://tests.synker.ovh/m3u"),
+                Uri = UriAddress.For("https://gist.githubusercontent.com/Fazzani/722f67c30ada8bac4602f62a2aaccff6/raw/032182a68311091617717168f22559c9993aa21a/playlist1.m3u"),
                 CreatedDate = DateTime.UtcNow.AddDays(-2)
             });
 
