@@ -33,7 +33,7 @@ namespace Synker.Application.DataSourceReader
             var medias = await _xtreamClient.GetLiveStreamsAsync(connectionInfo, cancellationToken);
 
             if (medias == null)
-                return null;
+                return new List<Media>();
 
             return medias.Select(x => new
             {
