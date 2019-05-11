@@ -16,6 +16,12 @@ namespace Synker.Api.Controllers
 {
     public class DataSourcesController : BaseController
     {
+        /// <summary>
+        /// Getting datasources without they medias
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         [HttpPost("list")]
         [ProducesResponseType(typeof(PagedResult<DatasourceLookupViewModel>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetList([FromBody] ListDatasourceQuery query, CancellationToken cancellationToken)
@@ -31,6 +37,13 @@ namespace Synker.Api.Controllers
             return Ok(await Mediator.Send(new GetDataSourceQuery { Id = id }, cancellationToken));
         }
 
+        /// <summary>
+        /// Getting datasources with they medias
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="query"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         [HttpPost("{id}/medias", Name = nameof(GetWithMedias))]
         [ProducesResponseType(typeof(PagedResult<DataSourceMediasViewModel>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
