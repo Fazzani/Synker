@@ -14,12 +14,10 @@
         public class Handler : IRequestHandler<DeletePlaylistCommand, Unit>
         {
             private readonly ISynkerDbContext _context;
-            private readonly IMediator _mediator;
 
-            public Handler(ISynkerDbContext context, IMediator mediator)
+            public Handler(ISynkerDbContext context)
             {
                 _context = context;
-                _mediator = mediator;
             }
 
             public async Task<Unit> Handle(DeletePlaylistCommand request, CancellationToken cancellationToken)

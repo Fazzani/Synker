@@ -3,7 +3,6 @@
     using Synker.Application.Interfaces;
     using Synker.Domain.Entities;
     using Synker.Domain.Entities.Core;
-    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
@@ -12,13 +11,13 @@
     using System.Threading;
     using System.Threading.Tasks;
 
-    public class M3uDataSourceReader : IDataSourceReader
+    public class M3UDataSourceReader : IDataSourceReader
     {
         private readonly M3uPlaylistDataSource _dataSource;
         public const string HeaderFile = "#EXTM3U";
         public const string HeaderUrl = "#EXTINF:";
 
-        public M3uDataSourceReader(M3uPlaylistDataSource dataSource)
+        public M3UDataSourceReader(M3uPlaylistDataSource dataSource)
         {
             _dataSource = dataSource;
         }
@@ -49,7 +48,7 @@
                 if (string.IsNullOrEmpty(line))
                     return listChannels;
                 var i = 1;
-                var isM3u = line.Equals(HeaderFile, StringComparison.OrdinalIgnoreCase);
+                //var isM3u = line.Equals(HeaderFile, StringComparison.OrdinalIgnoreCase);
                 while ((line = await stringReader.ReadLineAsync()) != null)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
@@ -57,7 +56,7 @@
                     if (line != string.Empty && line.StartsWith(HeaderUrl))
                     {
                         var tab1 = line.Split(',');
-                        var tab2 = tab1[0].Split(' ');
+                        //var tab2 = tab1[0].Split(' ');
                         //var live = tab2.FirstOrDefault().Equals(HeaderUrl + "0") || tab2.FirstOrDefault().Equals(HeaderUrl + "-1");
                         var channel = new Media
                         {
@@ -97,19 +96,25 @@
                         channel.Tvg.Id = value;
                     }
                     else
-                    if (item.Trim().StartsWith("tvg-logo"))
                     {
-                        channel.Tvg.Logo = value;
-                    }
-                    else
-                    if (item.Trim().StartsWith("tvg-name"))
-                    {
-                        channel.Tvg.Name = value;
-                    }
-                    else
-                    if (item.Trim().StartsWith("group-title"))
-                    {
-                        channel.Labels.Add(new Label { Key = Media.KnowedLabelKeys.GroupKey, Value = value });
+                        if (item.Trim().StartsWith("tvg-logo"))
+                        {
+                            channel.Tvg.Logo = value;
+                        }
+                        else
+                        {
+                            if (item.Trim().StartsWith("tvg-name"))
+                            {
+                                channel.Tvg.Name = value;
+                            }
+                            else
+                            {
+                                if (item.Trim().StartsWith("group-title"))
+                                {
+                                    channel.Labels.Add(new Label { Key = Media.KnowedLabelKeys.GroupKey, Value = value });
+                                }
+                            }
+                        }
                     }
                 }
             }

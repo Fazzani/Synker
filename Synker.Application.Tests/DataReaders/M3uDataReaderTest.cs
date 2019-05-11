@@ -25,7 +25,7 @@ namespace Synker.Application.Tests.DataReaders
                 UriAddress.For(url)
             };
 
-            var medias = await new M3uDataSourceReader(ds).GetMediasAsync();
+            var medias = await new M3UDataSourceReader(ds).GetMediasAsync();
             medias.ShouldNotBeNull();
             medias.Count.ShouldBe(count);
             medias.ShouldAllBe(x => x.DisplayName.Length > 0);

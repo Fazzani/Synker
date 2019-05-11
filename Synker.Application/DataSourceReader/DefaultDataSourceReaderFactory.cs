@@ -6,7 +6,7 @@ namespace Synker.Application.Interfaces
 {
     public class DefaultDataSourceReaderFactory : IDataSourceReaderFactory
     {
-        private IXtreamClient _xtreamClient;
+        private readonly IXtreamClient _xtreamClient;
 
         public DefaultDataSourceReaderFactory(IXtreamClient xtreamClient)
         {
@@ -17,7 +17,7 @@ namespace Synker.Application.Interfaces
         {
             if (playlistDataSource is M3uPlaylistDataSource uPlaylistDataSource)
             {
-                return new M3uDataSourceReader(uPlaylistDataSource);
+                return new M3UDataSourceReader(uPlaylistDataSource);
             }
             else
              if (playlistDataSource is XtreamPlaylistDataSource xtreamDataSource)

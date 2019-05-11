@@ -41,7 +41,7 @@
             {
                 uriAddress.Uri = new Uri(url);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }

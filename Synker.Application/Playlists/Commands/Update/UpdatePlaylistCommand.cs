@@ -22,12 +22,10 @@ namespace Synker.Application.Playlists.Commands.Update
         public class Handler : IRequestHandler<UpdatePlaylistCommand, Unit>
         {
             private readonly ISynkerDbContext _context;
-            private readonly IMediator _mediator;
 
-            public Handler(ISynkerDbContext context, IMediator mediator)
+            public Handler(ISynkerDbContext context)
             {
                 _context = context;
-                _mediator = mediator;
             }
 
             public async Task<Unit> Handle(UpdatePlaylistCommand request, CancellationToken cancellationToken)

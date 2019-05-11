@@ -11,6 +11,7 @@
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
+    using ApplicationException = Exceptions.ApplicationException;
 
     /// <summary>
     /// Get Datasource with medias
@@ -55,7 +56,7 @@
 
                 if (dataSourceReader == null)
                 {
-                    throw new Exception($"Unable to resolve DataSource reader for {datasource.GetType().Name}");
+                    throw new ApplicationException($"Unable to resolve DataSource reader for {datasource.GetType().Name}");
                 }
 
                return dataSourceReader.GetMedias().GetPaged(request.Page, request.PageSize, _mapper.Map<DataSourceMediasViewModel>);
