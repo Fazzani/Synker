@@ -28,7 +28,7 @@ namespace Synker.Application.DataSourceReader
         public async Task<List<Media>> GetMediasAsync(CancellationToken cancellationToken = default)
         {
             var connectionInfo = _dataSource.GetConnection();
-            var panelInfo = await _xtreamClient.GetPanelAsync(connectionInfo,  cancellationToken);
+            var panelInfo = await _xtreamClient.GetPanelAsync(connectionInfo, cancellationToken);
 
             var medias = await _xtreamClient.GetLiveStreamsAsync(connectionInfo, cancellationToken);
 
@@ -39,14 +39,16 @@ namespace Synker.Application.DataSourceReader
             {
                 success = UriAddress.TryFor(panelInfo.GenerateUrlFrom(x), out UriAddress uriAddress),
                 media = x,
-                url = uriAddress
+                url = uriAddress,
+                labels = new List<Label> { new Label { Key = Media.KnowedLabelKeys.GroupKey, Value = x.Category_name } }
             }
             ).Where(x => x.success)
-            .Select(m => new Media
+            .Select(m => new Media(m.labels)
             {
                 Position = m.media.Num,
                 DisplayName = m.media.Name,
-                Url = m.url
+                Url = m.url,
+                Tvg = new Tvg { Id = m.media.Epg_channel_id, Logo = m.media.Stream_icon }
             }).ToList();
         }
     }

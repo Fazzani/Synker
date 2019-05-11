@@ -58,7 +58,7 @@
                     {
                         var tab1 = line.Split(',');
                         var tab2 = tab1[0].Split(' ');
-                        var live = tab2.FirstOrDefault().Equals(HeaderUrl + "0") || tab2.FirstOrDefault().Equals(HeaderUrl + "-1");
+                        //var live = tab2.FirstOrDefault().Equals(HeaderUrl + "0") || tab2.FirstOrDefault().Equals(HeaderUrl + "-1");
                         var channel = new Media
                         {
                             DisplayName = tab1.Last().Trim(),
@@ -83,6 +83,8 @@
 
         private static void GetTvg(string[] tab1, Media channel)
         {
+            channel.Tvg = new Tvg();
+
             foreach (var item in tab1[0].Split(' '))
             {
                 var tabTags = item.Split('=');
@@ -91,16 +93,24 @@
                     var value = tabTags[1].Replace("\"", "");
 
                     if (item.Trim().StartsWith("tvg-id"))
-                        channel.Labels.Add(new Label { Key = "Tvg.TvgIdentify", Value = value });
+                    {
+                        channel.Tvg.Id = value;
+                    }
                     else
                     if (item.Trim().StartsWith("tvg-logo"))
-                        channel.Labels.Add(new Label { Key = "Tvg.Logo", Value = value });
+                    {
+                        channel.Tvg.Logo = value;
+                    }
                     else
                     if (item.Trim().StartsWith("tvg-name"))
-                        channel.Labels.Add(new Label { Key = "Tvg.Name", Value = value });
+                    {
+                        channel.Tvg.Name = value;
+                    }
                     else
                     if (item.Trim().StartsWith("group-title"))
-                        channel.Labels.Add(new Label { Key = "Group", Value = value });
+                    {
+                        channel.Labels.Add(new Label { Key = Media.KnowedLabelKeys.GroupKey, Value = value });
+                    }
                 }
             }
         }

@@ -22,7 +22,8 @@
         public void CreateMappings(Profile configuration)
         {
             configuration.CreateMap<Media, DataSourceMediasViewModel>().ForMember(x => x.Url, m => m.MapFrom(f => f.Url.Url));
-            configuration.CreateMap<Media, DataSourceMediasViewModel>().ForMember(x => x.Group, m => m.MapFrom(f => f.Labels.FirstOrDefault(x => x.Key.Equals(Media.KnowedLabelKeys.GroupKey))));
+            configuration.CreateMap<Media, DataSourceMediasViewModel>().ForMember(x => x.Picon, m => m.MapFrom(f => f.Tvg.Logo));
+            configuration.CreateMap<Media, DataSourceMediasViewModel>().ForMember(x => x.Group, m => m.MapFrom(f => f.Labels.FirstOrDefault(x => x.Key.Equals(Media.KnowedLabelKeys.GroupKey)).Value));
         }
     }
 

@@ -3,7 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Shouldly;
 using Synker.Application.DataSources.Queries;
+using Synker.Application.Infrastructure.PagedResult;
 using System;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -43,6 +45,13 @@ namespace Synker.Api.FunctionalTests.Tests.DataSources
             var httpResponse = await _client.PostAsJsonAsync("/api/1.0/datasources/4/medias", new DataSourceMediasQuery { DataSourceId = 1 });
             httpResponse.EnsureSuccessStatusCode();
             httpResponse.StatusCode.ShouldBe(HttpStatusCode.OK);
+
+            var ds = await Utilities.GetResponseContent<PagedResult<DataSourceMediasViewModel>>(httpResponse);
+            ds.ShouldNotBeNull();
+            ds.RowCount.ShouldBe(15);
+            ds.Results.Count.ShouldBe(10);
+
+            ds.Results.ShouldSatisfyAllConditions(() => ds.Results.Any(x => !string.IsNullOrEmpty(x.Picon)));
         }
 
         [Fact]

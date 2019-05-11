@@ -17,6 +17,11 @@
             MediaType = MediaType.LiveTv;
         }
 
+        public Media(List<Label> labels) : this()
+        {
+            labels.ForEach(x => this.AddNewLabel(x));
+        }
+
         public UriAddress Url { get; set; }
 
         public string DisplayName { get; set; }
@@ -53,7 +58,7 @@
         }
 
         public static bool operator ==(Media m1, Media m2) => m1.Equals(m2);
-        public static bool operator !=  (Media m1, Media m2) => !m1.Equals(m2);
+        public static bool operator !=(Media m1, Media m2) => !m1.Equals(m2);
         public static bool operator >(Media m1, Media m2) => m1.Position > m2.Position;
         public static bool operator >=(Media m1, Media m2) => m1.Position >= m2.Position;
         public static bool operator <(Media m1, Media m2) => m1.Position < m2.Position;
