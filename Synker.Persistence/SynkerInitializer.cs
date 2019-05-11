@@ -2,10 +2,12 @@
 using Synker.Domain.Entities.Core;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Synker.Persistence
 {
+    [ExcludeFromCodeCoverage]
     public class SynkerInitializer
     {
         private readonly Dictionary<int, User> Users = new Dictionary<int, User>();

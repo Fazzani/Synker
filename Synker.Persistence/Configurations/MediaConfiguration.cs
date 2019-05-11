@@ -5,7 +5,9 @@
     using Newtonsoft.Json;
     using Synker.Domain.Entities;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
 
+    [ExcludeFromCodeCoverage]
     public class MediaConfiguration : AuditEntityTypeConfiguration<Media>
     {
         public override void Configure(EntityTypeBuilder<Media> builder)

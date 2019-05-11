@@ -4,7 +4,9 @@
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using Synker.Domain.Entities;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
 
+    [ExcludeFromCodeCoverage]
     public class PlaylistDataSourceConfiguration<TEntity> : AuditEntityTypeConfiguration<TEntity> where TEntity : PlaylistDataSource
     {
         public override void Configure(EntityTypeBuilder<TEntity> builder)
