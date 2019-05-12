@@ -5,6 +5,8 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <UserSecretsId>42360d65-f1a3-4226-bade-10b269e8c01b</UserSecretsId>
+    <!-- SonarQube needs this -->
+    <ProjectGuid>6224c484-3e23-4f06-a749-195c1e478110</ProjectGuid>
   </PropertyGroup>
 
   <PropertyGroup>

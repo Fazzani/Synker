@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AssemblyName>Synker.Application</AssemblyName>
     <RootNamespace>Synker.Application</RootNamespace>
+    <ProjectGuid>6224c484-3e23-4f06-a749-195c1e478114</ProjectGuid>
   </PropertyGroup>
   
   <PropertyGroup>

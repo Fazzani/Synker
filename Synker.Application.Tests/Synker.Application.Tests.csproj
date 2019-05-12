@@ -5,6 +5,7 @@
     <IsTestProject>true</IsTestProject>
     <IsPackable>false</IsPackable>
     <LangVersion>7.1</LangVersion>
+    <ProjectGuid>6224c484-3e23-4f06-a749-195c1e478117</ProjectGuid>
   </PropertyGroup>
 
   <ItemGroup>
