@@ -2,12 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <IsTestProject>true</IsTestProject>
+    <IsPackable>false</IsPackable>
     <LangVersion>7.1</LangVersion>
   </PropertyGroup>
-  
+
   <PropertyGroup>
-    <IsTestProject>false</IsTestProject>
-    <Authors>Heni Fazzani</Authors>
+    <Company>Synker</Company>
+    <Authors>Heni FAZZANI</Authors>
+    <PackageId>Synker.Persistence</PackageId>
+    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup>
