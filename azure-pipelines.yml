@@ -50,7 +50,7 @@ steps:
   continueOnError: true
   inputs:
     command: test
-    projects: **/.Tests.csproj
+    projects: '**/.Tests.csproj'
     arguments: '-p:Exclude=[xunit.*]* -c $(buildConfiguration) -p:CollectCoverage=true "-p:CoverletOutputFormat=\"cobertura,opencover\""'
     nobuild: true
 
