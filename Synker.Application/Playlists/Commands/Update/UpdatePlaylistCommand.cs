@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Synker.Application.Playlists.Commands.Update
+namespace Synker.Application.Playlists.Commands
 {
     public class UpdatePlaylistCommand : IRequest
     {

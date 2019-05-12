@@ -84,7 +84,10 @@
 
         public void AddRangeMedia(List<Media> medias)
         {
-            medias.ForEach(AddMedia);
+            if (medias != null)
+            {
+                medias.ForEach(AddMedia);
+            }
         }
 
         public bool RemoveMedia(long id)

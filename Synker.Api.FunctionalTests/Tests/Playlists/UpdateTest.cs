@@ -1,5 +1,5 @@
 ﻿using Shouldly;
-using Synker.Application.Playlists.Commands.Update;
+using Synker.Application.Playlists.Commands;
 using Synker.Persistence;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -19,21 +19,21 @@ namespace Synker.Api.FunctionalTests.Tests.Playlists
         }
 
         [Fact, Order(0)]
-        public async Task Update_Playlist_BadRequest()
+        public async Task BadRequest()
         {
             var httpResponse = await _client.PutAsJsonAsync("/api/1.0/Playlists/1", new UpdatePlaylistCommand { Name = "tt" });
             httpResponse.StatusCode.ShouldBe(System.Net.HttpStatusCode.BadRequest);
         }
 
         [Fact, Order(1)]
-        public async Task Update_Playlist_Not_Found()
+        public async Task Not_Found()
         {
             var httpResponse = await _client.PutAsJsonAsync("/api/1.0/Playlists/111111", new UpdatePlaylistCommand { Name = "test" });
             httpResponse.StatusCode.ShouldBe(System.Net.HttpStatusCode.NotFound);
         }
 
         [Fact, Order(2)]
-        public async Task Update_Playlist_Ok()
+        public async Task Ok()
         {
             var id = Data.Playlists[2].Id;
             var httpResponse = await _client.PutAsJsonAsync($"/api/1.0/Playlists/{id}", new UpdatePlaylistCommand

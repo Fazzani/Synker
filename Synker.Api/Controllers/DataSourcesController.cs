@@ -29,10 +29,10 @@ namespace Synker.Api.Controllers
             return Ok(await Mediator.Send(query, cancellationToken));
         }
 
-        [HttpGet("{id}", Name = nameof(Get))]
+        [HttpGet("{id}", Name = nameof(GetDataSource))]
         [ProducesResponseType(typeof(DataSourceViewModel), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Get([FromRoute][Required]long id, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> GetDataSource([FromRoute][Required]long id, CancellationToken cancellationToken = default)
         {
             return Ok(await Mediator.Send(new GetDataSourceQuery { Id = id }, cancellationToken));
         }
@@ -60,7 +60,7 @@ namespace Synker.Api.Controllers
         public async Task<IActionResult> Post([FromBody] CreateDataSourceCommand cmd, CancellationToken cancellationToken)
         {
             var dataSourceId = await Mediator.Send(cmd, cancellationToken);
-            return CreatedAtRoute(nameof(Get), new { id = dataSourceId }, cmd);
+            return CreatedAtRoute(nameof(GetDataSource), new { id = dataSourceId }, cmd);
         }
 
         [HttpPut("{id}")]

@@ -1,7 +1,10 @@
 using Shouldly;
 using Synker.Application.DataSources.Commands.Create;
 using Synker.Domain.Entities;
+using Synker.Persistence;
+using System;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xunit;
 using Xunit.Extensions.Ordering;
@@ -40,8 +43,12 @@ namespace Synker.Api.FunctionalTests.Tests.DataSources
 
             httpResponse.StatusCode.ShouldBe(System.Net.HttpStatusCode.Created);
 
-            //TODO: GET "Created" Status with dataSource id
-        }
+            var location = httpResponse.Headers.Location.ToString();
+            var match = Regex.Match(location, @"/api/1.0/datasources/(?<id>\d+)$", RegexOptions.ExplicitCapture | RegexOptions.IgnoreCase);
 
+            match.Success.ShouldBeTrue();
+            match.Groups["id"].Success.ShouldBeTrue();
+            Convert.ToInt32(match.Groups["id"].Value).ShouldBeGreaterThanOrEqualTo(Data.DataSources.Count);
+        }
     }
 }

@@ -26,7 +26,7 @@ namespace Synker.Application.DataSources.Commands.Delete
 
                 if (entity == null)
                 {
-                    throw new NotFoundException(nameof(PlaylistDataSource), entity.Id);
+                    throw new NotFoundException(nameof(PlaylistDataSource), request.Id);
                 }
 
                 _context.PlaylistDataSources.Remove(entity);

@@ -1,4 +1,4 @@
-﻿namespace Synker.Application.Playlists.Commands.Delete
+﻿namespace Synker.Application.Playlists.Commands
 {
     using MediatR;
     using Synker.Application.Exceptions;

@@ -1,4 +1,4 @@
-﻿namespace Synker.Application.Playlists.Commands.Update
+﻿namespace Synker.Application.Playlists.Commands
 {
     using FluentValidation;
     public class UpdatePlaylistValidator : AbstractValidator<UpdatePlaylistCommand>

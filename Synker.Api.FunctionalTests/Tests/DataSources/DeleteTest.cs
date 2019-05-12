@@ -1,5 +1,4 @@
 ﻿using Shouldly;
-using Synker.Application.DataSources.Commands.Update;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
@@ -18,14 +17,14 @@ namespace Synker.Api.FunctionalTests.Tests.DataSources
         }
 
         [Fact, Order(0)]
-        public async Task Delete_DataSource_Not_Found()
+        public async Task Not_Found()
         {
-            var httpResponse = await _client.PutAsJsonAsync("/api/1.0/datasources/111111", new UpdateDataSourceCommand { Name = "test" });
+            var httpResponse = await _client.DeleteAsync("/api/1.0/datasources/111111");
             httpResponse.StatusCode.ShouldBe(System.Net.HttpStatusCode.NotFound);
         }
 
         [Fact, Order(1)]
-        public async Task Delete_DataSource_Ok()
+        public async Task Delete_Ok()
         {
             var httpResponse = await _client.DeleteAsync("/api/1.0/datasources/1");
             httpResponse.EnsureSuccessStatusCode();
