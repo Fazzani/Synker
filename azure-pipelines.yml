@@ -50,8 +50,8 @@ steps:
   continueOnError: true
   inputs:
     command: test
-    projects: 'Synker.Api.sln'
-    arguments: '"-p:Exclude=\"[xunit.*]*,[testhost]*\"" -c $(buildConfiguration) -p:CollectCoverage=true "-p:CoverletOutputFormat=\"cobertura,opencover\""'
+    projects: **/.Tests.csproj
+    arguments: '-p:Exclude=[xunit.*]* -c $(buildConfiguration) -p:CollectCoverage=true "-p:CoverletOutputFormat=\"cobertura,opencover\""'
     nobuild: true
 
 - task: DotNetCoreCLI@2
