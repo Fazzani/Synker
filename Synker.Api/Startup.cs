@@ -25,7 +25,7 @@ namespace Synker.Api
 {
     public class Startup
     {
-        public volatile static string AssemblyVersion = typeof(Startup).GetTypeInfo().Assembly.GetCustomAttribute<AssemblyFileVersionAttribute>().Version;
+        private volatile static string assemblyVersion = typeof(Startup).GetTypeInfo().Assembly.GetCustomAttribute<AssemblyFileVersionAttribute>().Version;
 
         public Startup(IConfiguration configuration)
         {
@@ -33,6 +33,7 @@ namespace Synker.Api
         }
 
         public IConfiguration Configuration { get; }
+        public static string AssemblyVersion { get => assemblyVersion; set => assemblyVersion = value; }
 
         // This method gets called by the runtime. Use this method   to add services to the container.
         public void ConfigureServices(IServiceCollection services)
