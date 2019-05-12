@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Synker.Persistence.Migrations
 {
+    [ExcludeFromCodeCoverage]
     public partial class initialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

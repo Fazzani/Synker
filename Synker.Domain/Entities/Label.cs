@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Synker.Domain.Entities
 {
-    public class Label : IComparable<Label>, IEquatable<Label>, IEqualityComparer<Label>
+    public sealed class Label : IComparable<Label>, IEquatable<Label>, IEqualityComparer<Label>
     {
         public string Key { get; set; }
         public string Value { get; set; }
