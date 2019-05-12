@@ -1,5 +1,6 @@
 ﻿using Shouldly;
 using Synker.Application.Playlists.Commands.Update;
+using Synker.Persistence;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
@@ -8,7 +9,7 @@ using Xunit.Extensions.Ordering;
 namespace Synker.Api.FunctionalTests.Tests.Playlists
 {
     [Collection(nameof(PlaylistCollection))]
-    public class UpdateTest : IClassFixture<CustomWebApplicationFactory<Startup>>
+    public class UpdateTest
     {
         private readonly HttpClient _client;
 
@@ -34,7 +35,8 @@ namespace Synker.Api.FunctionalTests.Tests.Playlists
         [Fact, Order(2)]
         public async Task Update_Playlist_Ok()
         {
-            var httpResponse = await _client.PutAsJsonAsync("/api/1.0/Playlists/1", new UpdatePlaylistCommand
+            var id = Data.Playlists[2].Id;
+            var httpResponse = await _client.PutAsJsonAsync($"/api/1.0/Playlists/{id}", new UpdatePlaylistCommand
             {
                 Name = "test",
                 State = true

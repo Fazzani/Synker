@@ -7,7 +7,6 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Extensions.Ordering;
 
 namespace Synker.Api.FunctionalTests.Tests.DataSources
 {
@@ -24,7 +23,7 @@ namespace Synker.Api.FunctionalTests.Tests.DataSources
         [Fact]
         public async Task GetList_DataSource_PageSize_Ok()
         {
-            var httpResponse = await _client.PostAsJsonAsync("/api/1.0/datasources/list", new ListDatasourceQuery { PageSize=12 });
+            var httpResponse = await _client.PostAsJsonAsync("/api/1.0/datasources/list", new ListDatasourceQuery { PageSize = 12 });
 
             // Must be successful.
             httpResponse.EnsureSuccessStatusCode();

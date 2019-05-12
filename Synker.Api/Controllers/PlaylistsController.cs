@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Synker.Api.Infrastructure;
+using Synker.Application.Infrastructure.PagedResult;
 using Synker.Application.Playlists.Commands.Create;
 using Synker.Application.Playlists.Commands.Delete;
 using Synker.Application.Playlists.Commands.Update;
@@ -15,12 +17,18 @@ namespace Synker.Api.Controllers
 {
     public class PlaylistsController : BaseController
     {
-        //[HttpGet]
-        //[ProducesResponseType(typeof(ListPlaylistViewModel), StatusCodes.Status200OK)]
-        //public async Task<IActionResult> GetList([FromBody] ListPlaylistQuery query, CancellationToken cancellationToken)
-        //{
-        //    return Ok(await Mediator.Send(query, cancellationToken));
-        //}
+        /// <summary>
+        /// Listing playlists without they medias
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpPost("list")]
+        [ProducesResponseType(typeof(PlaylistLookupViewModel), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetList([FromBody] ListPlaylistQuery query, CancellationToken cancellationToken)
+        {
+            return Ok(await Mediator.Send(query, cancellationToken));
+        }
 
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(PlaylistViewModel), StatusCodes.Status200OK)]
@@ -30,6 +38,21 @@ namespace Synker.Api.Controllers
             return Ok(await Mediator.Send(new GetPlaylistQuery { Id = id }, cancellationToken));
         }
 
+        /// <summary>
+        /// Listing playlists with they medias
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="query"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpPost("{id}/medias", Name = "GetPlaylistWithMedias")]
+        [ProducesResponseType(typeof(PagedResult<PlaylistMediasViewModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetWithMedias([FromRoute][Required]long id, [FromBody] PlaylistMediasQuery query, CancellationToken cancellationToken = default)
+        {
+            query.Id = id;
+            return Ok(await Mediator.Send(query, cancellationToken));
+        }
 
         [HttpPost]
         [ProducesResponseType(typeof(long), StatusCodes.Status201Created)]

@@ -8,7 +8,7 @@ using Xunit.Extensions.Ordering;
 namespace Synker.Api.FunctionalTests.Tests.DataSources
 {
     [Collection(nameof(DataSourceCollection))]
-    public class GetTest : IClassFixture<CustomWebApplicationFactory<Startup>>
+    public class GetTest
     {
         private readonly HttpClient _client;
 
@@ -20,7 +20,8 @@ namespace Synker.Api.FunctionalTests.Tests.DataSources
         [Fact, Order(0)]
         public async Task Get_DataSource_Ok()
         {
-            var httpResponse = await _client.GetAsync("/api/1.0/datasources/1");
+            long id = 3;
+            var httpResponse = await _client.GetAsync($"/api/1.0/datasources/{3}");
 
             // Must be successful.
             httpResponse.EnsureSuccessStatusCode();
@@ -29,7 +30,7 @@ namespace Synker.Api.FunctionalTests.Tests.DataSources
             httpResponse.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
 
             ds.ShouldNotBeNull();
-            ds.Id.ShouldBe(1);
+            ds.Id.ShouldBe(id);
         }
 
         [Fact, Order(1)]

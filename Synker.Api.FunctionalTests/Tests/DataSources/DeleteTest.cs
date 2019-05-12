@@ -8,7 +8,7 @@ using Xunit.Extensions.Ordering;
 namespace Synker.Api.FunctionalTests.Tests.DataSources
 {
     [Collection(nameof(DataSourceCollection))]
-    public class DeleteTest : IClassFixture<CustomWebApplicationFactory<Startup>>
+    public class DeleteTest
     {
         private readonly HttpClient _client;
 

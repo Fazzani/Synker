@@ -12,8 +12,7 @@
             builder.OwnsOne(x => x.Authentication, auth =>
             {
                 auth.Property(x => x.User).IsRequired().HasMaxLength(255);
-                auth.Property(x => x.Password)
-                .HasMaxLength(255);
+                auth.Property(x => x.Password).HasMaxLength(255);
             });
 
             builder.OwnsOne(x => x.Server, uri =>

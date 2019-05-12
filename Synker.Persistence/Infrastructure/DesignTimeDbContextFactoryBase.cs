@@ -45,8 +45,6 @@ namespace Synker.Persistence.Infrastructure
                 throw new ArgumentException($"Connection string '{ConnectionStringName}' is null or empty.", nameof(connectionString));
             }
 
-            Console.WriteLine($"DesignTimeDbContextFactoryBase.Create(string): Connection string: '{connectionString}'.");
-
             var optionsBuilder = new DbContextOptionsBuilder<TContext>();
 
             optionsBuilder.UseNpgsql(connectionString);

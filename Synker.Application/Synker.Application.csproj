@@ -22,10 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Playlists\Queries\GetListPlaylist\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Synker.Common\Synker.Common.csproj" />
     <ProjectReference Include="..\Synker.Domain\Synker.Domain.csproj" />
   </ItemGroup>

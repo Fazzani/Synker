@@ -73,7 +73,7 @@
             return m.Url == Url; //&& m.DisplayName == DisplayName;
         }
 
-        public override int GetHashCode() => Url.GetHashCode();
+        public override int GetHashCode() => Url?.GetHashCode() ?? 0;
 
         public override string ToString() => $"{Position} {DisplayName}";
 

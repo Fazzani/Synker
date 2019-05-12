@@ -9,7 +9,7 @@ using Xunit.Extensions.Ordering;
 namespace Synker.Api.FunctionalTests.Tests.DataSources
 {
     [Collection(nameof(DataSourceCollection))]
-    public class UpdateTest : IClassFixture<CustomWebApplicationFactory<Startup>>
+    public class UpdateTest
     {
         private readonly HttpClient _client;
 
@@ -35,7 +35,7 @@ namespace Synker.Api.FunctionalTests.Tests.DataSources
         [Fact, Order(12)]
         public async Task Update_DataSource_Ok()
         {
-            var httpResponse = await _client.PutAsJsonAsync("/api/1.0/datasources/1", new UpdateDataSourceCommand
+            var httpResponse = await _client.PutAsJsonAsync("/api/1.0/datasources/2", new UpdateDataSourceCommand
             {
                 Name = "test",
                 PlaylistDataSourceFormat = PlaylistDataSourceFormatEnum.M3u,

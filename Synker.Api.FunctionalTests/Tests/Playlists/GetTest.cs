@@ -1,5 +1,6 @@
 ﻿using Shouldly;
 using Synker.Application.Playlists.Queries;
+using Synker.Persistence;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
@@ -20,7 +21,9 @@ namespace Synker.Api.FunctionalTests.Tests.Playlists
         [Fact, Order(0)]
         public async Task Get_Playlist_Ok()
         {
-            var httpResponse = await _client.GetAsync("/api/1.0/playlists/1");
+            var id = Data.Playlists[4].Id;
+
+            var httpResponse = await _client.GetAsync($"/api/1.0/playlists/{id}");
 
             // Must be successful.
             httpResponse.EnsureSuccessStatusCode();
@@ -29,7 +32,7 @@ namespace Synker.Api.FunctionalTests.Tests.Playlists
             httpResponse.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
 
             ds.ShouldNotBeNull();
-            ds.Id.ShouldBe(1);
+            ds.Id.ShouldBe(id);
         }
 
         [Fact, Order(1)]

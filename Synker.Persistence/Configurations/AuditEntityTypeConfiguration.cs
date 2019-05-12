@@ -10,11 +10,9 @@
     {
         public virtual void Configure(EntityTypeBuilder<TEntity> builder)
         {
-            builder.Property(x => x.CreatedDate)
-                .HasDefaultValueSql("transaction_timestamp()");
+            builder.Property(x => x.CreatedDate);
 
-            builder.Property(x => x.UpdatedDate)
-                .HasDefaultValueSql("transaction_timestamp()");
+            builder.Property(x => x.UpdatedDate);
         }
     }
 }

@@ -9,7 +9,7 @@ using Xunit.Extensions.Ordering;
 namespace Synker.Api.FunctionalTests.Tests.DataSources
 {
     [Collection(nameof(DataSourceCollection))]
-    public class CreateTest : IClassFixture<CustomWebApplicationFactory<Startup>>
+    public class CreateTest
     {
         private readonly HttpClient _client;
 
