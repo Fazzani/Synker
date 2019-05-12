@@ -35,4 +35,8 @@
     <ProjectReference Include="..\Synker.Application\Synker.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
 </Project>
