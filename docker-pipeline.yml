@@ -26,11 +26,10 @@ steps:
   displayName: 'Build Synker Api image'
   inputs:
     containerRegistry: docker
-    defaultContext: false
     buildContext: '$(Build.SourcesDirectory)'
     repository: 'synker/synker_api
     tags: |
-      '$(GitVersion.SemVer)'
+      $(GitVersion.SemVer)
       latest
 
 - task: Docker@2
@@ -40,7 +39,7 @@ steps:
     command: 'Push'
     repository: 'synker/synker_api
     tags: |
-      '$(GitVersion.SemVer)'
+      $(GitVersion.SemVer)
       latest
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 
