@@ -50,9 +50,10 @@ steps:
   continueOnError: true
   inputs:
     command: test
-    projects: '**/.Tests.csproj'
+    projects: '**/*.Tests.csproj'
     arguments: '-p:Exclude=[xunit.*]* -c $(buildConfiguration) -p:CollectCoverage=true "-p:CoverletOutputFormat=\"cobertura,opencover\""'
     nobuild: true
+    publishTestResults: true
 
 - task: DotNetCoreCLI@2
   displayName: Install ReportGenerator Global Tool
@@ -81,7 +82,7 @@ steps:
   displayName: 'Publishing Unit Test Results'
   inputs:
     testRunner: VSTest
-    testResultsFiles: '/home/vsts/work/**/*.trx'
+    testResultsFiles: '$(Agent.TempDirectory)/*.trx'
 
 - task: SonarCloudAnalyze@1
   displayName: 'Run Code Analysis'
