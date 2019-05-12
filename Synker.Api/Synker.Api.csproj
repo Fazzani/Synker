@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-  </PropertyGroup>
-    
-  <PropertyGroup>
     <IsTestProject>false</IsTestProject>
     <LangVersion>7.1</LangVersion>
     <IsPackable>false</IsPackable>
