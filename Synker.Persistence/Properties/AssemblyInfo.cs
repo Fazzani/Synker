@@ -1,3 +1,1 @@
-﻿using System.Runtime.CompilerServices;
-
-[assembly: InternalsVisibleTo("Synker.Api.FunctionalTests")]
+﻿[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Synker.Api.FunctionalTests")]

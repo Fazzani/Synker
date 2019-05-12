@@ -12,9 +12,9 @@ using System;
 using System.Reflection;
 using Xunit;
 
-[assembly: CollectionBehavior(DisableTestParallelization = true)]
-[assembly: TestCaseOrderer("Xunit.Extensions.Ordering.TestCaseOrderer", "Xunit.Extensions.Ordering")]
-[assembly: TestCollectionOrderer("Xunit.Extensions.Ordering.CollectionOrderer", "Xunit.Extensions.Ordering")]
+[assembly: Xunit.CollectionBehavior(DisableTestParallelization = true)]
+[assembly: Xunit.TestCaseOrderer("Xunit.Extensions.Ordering.TestCaseOrderer", "Xunit.Extensions.Ordering")]
+[assembly: Xunit.TestCollectionOrderer("Xunit.Extensions.Ordering.CollectionOrderer", "Xunit.Extensions.Ordering")]
 [assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("Synker.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "C:\\Users\\heni.fazzani\\source\\repos\\Synker.Api\\Synker.Api", "Synker.Api.csproj", "0")]
 [assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("Synker.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "C:\\Users\\heni.fazzani\\source\\repos\\Synker.Api\\Synker.Application", "Synker.Application.csproj", "0")]
 [assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("Synker.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "C:\\Users\\heni.fazzani\\source\\repos\\Synker.Api\\Synker.Common", "Synker.Common.csproj", "0")]

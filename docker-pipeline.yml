@@ -15,24 +15,41 @@ steps:
   inputs:
     updateAssemblyInfo: true
 
+- task: Docker@2
+  displayName: Login to Docker Hub
+  inputs:
+    command: login
+    containerRegistry: docker
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+
 - task: Docker@0
   displayName: 'Build Synker Api image'
   inputs:
-    containerregistrytype: 'Container Registry'
-    dockerRegistryConnection: docker
+    containerRegistry: docker
     defaultContext: false
-    context: '$(Build.SourcesDirectory)'
-    imageName: 'synker/synker_api:$(GitVersion.SemVer)'
-    includeLatestTag: true
+    buildContext: '$(Build.SourcesDirectory)'
+    repository: 'synker/synker_api
+     tags: |
+      $(GitVersion.SemVer)'
+      latest
 
-- task: Docker@0
+- task: Docker@2
   displayName: 'Push Synker image'
   inputs:
-    containerregistrytype: 'Container Registry'
-    dockerRegistryConnection: docker
-    action: 'Push an image'
-    imageName: 'synker/synker_api:$(GitVersion.SemVer)'
-    includeLatestTag: true
+    containerRegistry: docker
+    command: 'Push'
+    repository: 'synker/synker_api
+    tags: |
+      $(GitVersion.SemVer)'
+      latest
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+
+- task: Docker@2
+  displayName: Logout of Docker Hub
+  inputs:
+    command: logout
+    containerRegistry: docker
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 
 - task: GitHubRelease@0
   inputs:
