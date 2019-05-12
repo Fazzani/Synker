@@ -8,4 +8,5 @@ namespace Synker.Api.FunctionalTests
 
     [CollectionDefinition(nameof(DataSourceCollection)), Order(1)]
     public class DataSourceCollection : ICollectionFixture<CustomWebApplicationFactory<Startup>> { }
+
 }
