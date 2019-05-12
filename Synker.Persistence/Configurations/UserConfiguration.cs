@@ -2,6 +2,9 @@
 {
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using Synker.Domain.Entities;
+    using System.Diagnostics.CodeAnalysis;
+
+    [ExcludeFromCodeCoverage]
     public class UserConfiguration : AuditEntityTypeConfiguration<User>
     {
         public override void Configure(EntityTypeBuilder<User> builder)

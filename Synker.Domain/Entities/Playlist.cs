@@ -11,7 +11,6 @@
     {
         public Playlist()
         {
-            //PlaylistDataSources = new HashSet<PlaylistDataSource>();
             Medias = new HashSet<Media>();
         }
 
@@ -20,8 +19,6 @@
         public OnlineState State { get; set; }
 
         public User User { get; set; }
-
-        //public ICollection<PlaylistDataSource> PlaylistDataSources { get; }
 
         public ICollection<Media> Medias { get; } //TODO: shadow property and pass it to private scope
 
@@ -53,14 +50,54 @@
             Medias.Add(media);
         }
 
-        public bool RemoveMedia(long mediaId)
+        public bool TryAddMedia(Media media, out List<ValidationResult> validationResults)
         {
-            if (!Medias.Any(x => x.Id == mediaId))
+            validationResults = new List<ValidationResult>();
+
+            if (!Validator.TryValidateObject(media, new ValidationContext(media), validationResults, true))
             {
-                throw new MediaNotFoundException(mediaId, this);
+                return false;
             }
 
-            return Medias.Remove(Medias.First(x => x.Id == mediaId));
+            if (Medias.Any(x => x.Equals(media)))
+            {
+                validationResults.Add(new ValidationResult(new DuplicatedPlaylistMediaException(media, this).Message));
+                return false;
+            }
+
+            if (media.Position == -1)
+            {
+                media.Position = Medias.Count > 0 ? Medias.Max(x => x.Position) + 1 : 0;
+            }
+            else
+            {
+                if (Medias.Any(x => x.Position == media.Position))
+                {
+                    validationResults.Add(new ValidationResult(new MediaSomePositionException(media, this).Message));
+                    return false;
+                }
+            }
+
+            Medias.Add(media);
+            return true;
+        }
+
+        public void AddRangeMedia(List<Media> medias)
+        {
+            if (medias != null)
+            {
+                medias.ForEach(AddMedia);
+            }
+        }
+
+        public bool RemoveMedia(long id)
+        {
+            if (!Medias.Any(x => x.Id == id))
+            {
+                throw new MediaNotFoundException(id, this);
+            }
+
+            return Medias.Remove(Medias.First(x => x.Id == id));
         }
     }
 }

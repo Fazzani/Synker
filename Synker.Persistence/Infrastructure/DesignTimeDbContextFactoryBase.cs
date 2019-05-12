@@ -2,12 +2,12 @@
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Text;
 
 namespace Synker.Persistence.Infrastructure
 {
+    [ExcludeFromCodeCoverage]
     public abstract class DesignTimeDbContextFactoryBase<TContext> :
        IDesignTimeDbContextFactory<TContext> where TContext : DbContext
     {
@@ -44,8 +44,6 @@ namespace Synker.Persistence.Infrastructure
             {
                 throw new ArgumentException($"Connection string '{ConnectionStringName}' is null or empty.", nameof(connectionString));
             }
-
-            Console.WriteLine($"DesignTimeDbContextFactoryBase.Create(string): Connection string: '{connectionString}'.");
 
             var optionsBuilder = new DbContextOptionsBuilder<TContext>();
 

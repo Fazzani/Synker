@@ -14,7 +14,7 @@
         public string Url
         {
             get { return Uri?.AbsoluteUri; }
-           private set { Uri = new Uri(value); }
+            private set { Uri = new Uri(value); }
         }
 
         public static UriAddress For(string url)
@@ -31,6 +31,22 @@
             }
 
             return uriAddress;
+        }
+
+        public static bool TryFor(string url, out UriAddress uriAddress)
+        {
+            uriAddress = new UriAddress();
+
+            try
+            {
+                uriAddress.Uri = new Uri(url);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public Uri Uri { get; private set; }

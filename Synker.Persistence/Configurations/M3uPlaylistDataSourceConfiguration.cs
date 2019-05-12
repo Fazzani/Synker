@@ -2,7 +2,9 @@
 {
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using Synker.Domain.Entities;
+    using System.Diagnostics.CodeAnalysis;
 
+    [ExcludeFromCodeCoverage]
     public class M3uPlaylistDataSourceConfiguration : PlaylistDataSourceConfiguration<M3uPlaylistDataSource>
     {
         public override void Configure(EntityTypeBuilder<M3uPlaylistDataSource> builder)

@@ -1,6 +1,7 @@
 ﻿namespace Synker.Persistence
 {
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Infrastructure;
     using Synker.Application.Interfaces;
     using Synker.Domain.Entities;
     using Synker.Domain.Entities.Core;

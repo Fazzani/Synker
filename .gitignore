@@ -262,21 +262,31 @@ __pycache__/
 
 #M3u files test
 **/*.m3u
+
 #sonarqube
 .sonarqube/
-/SyncLibrary/log.log.*
+
 *.loc
 *.tmp
 .vscode/
 *.log
+log/
+
 **/appsettings.development.json
 **/appsettings.Production.json
 **/appsettings.staging.json
-log/
+
 *.bookmark
+
 *docker-elk-serilog-*-buffer-*.json
 *docker-elk-serilog-*-buffer-*.json
+
 **/*livenessdb
+
+# TESTS
 CodeCoverage/
 **/*.opencover.xml
+results_tests/
 **/*.trx
+**/coverage.cobertura.xml
+**/coverage.json

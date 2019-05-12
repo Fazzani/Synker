@@ -20,12 +20,10 @@ namespace Synker.Application.DataSources.Commands.Update
         public class Handler : IRequestHandler<UpdateDataSourceCommand, Unit>
         {
             private readonly ISynkerDbContext _context;
-            private readonly IMediator _mediator;
 
-            public Handler(ISynkerDbContext context, IMediator mediator)
+            public Handler(ISynkerDbContext context)
             {
                 _context = context;
-                _mediator = mediator;
             }
 
             public async Task<Unit> Handle(UpdateDataSourceCommand request, CancellationToken cancellationToken)

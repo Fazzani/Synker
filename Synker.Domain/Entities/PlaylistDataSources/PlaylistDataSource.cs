@@ -4,9 +4,10 @@
     using Synker.Domain.Infrastructure;
 
     /// <summary>
-    /// There are 2 types of datasource
+    /// There are 3 different types of datasource
     /// - XtreamCode (Server addr, login, password)
     /// - M3u
+    /// - TvList
     /// </summary>
     public class PlaylistDataSource : EntityIdAudit<long>, IAggregateRoot
     {

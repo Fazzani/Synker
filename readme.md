@@ -3,6 +3,12 @@
 [![Build Status](https://dev.azure.com/henifazzani/SynkerAPI/_apis/build/status/SynkerAPI-CI?branchName=master)](https://dev.azure.com/henifazzani/SynkerAPI/_build/latest?definitionId=12&branchName=master)
 [![Build Status](https://dev.azure.com/henifazzani/SynkerAPI/_apis/build/status/SynkerAPI-Docker%20CI?branchName=master)](https://dev.azure.com/henifazzani/SynkerAPI/_build/latest?definitionId=14&branchName=master)
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Fazzani_Synker&metric=alert_status)](https://sonarcloud.io/dashboard?id=Fazzani_Synker)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Fazzani_Synker&metric=coverage)](https://sonarcloud.io/dashboard?id=Fazzani_Synker)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=Fazzani_Synker&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=Fazzani_Synker)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=Fazzani_Synker&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=Fazzani_Synker)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=Fazzani_Synker&metric=code_smells)](https://sonarcloud.io/dashboard?id=Fazzani_Synker)
+
 ## Architecture (Clean architecture)
 
 Inspired from [NorthwindTraders][NorthwindTraders]
@@ -22,6 +28,7 @@ Inspired from [NorthwindTraders][NorthwindTraders]
     - Auto grouping
     - Shift time
     - Custom && dynamic
+- DataSources
 - EPG service
 - Picons service
 - Authentication Service (IDP)

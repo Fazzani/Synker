@@ -2,6 +2,7 @@
 {
     using Synker.Domain.Entities.Core;
     using Synker.Domain.Exceptions;
+    using Synker.Domain.Infrastructure;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -12,6 +13,13 @@
         public Media()
         {
             Labels = new HashSet<Label>();
+            Enabled = true;
+            MediaType = MediaType.LiveTv;
+        }
+
+        public Media(List<Label> labels) : this()
+        {
+            labels.ForEach(x => this.AddNewLabel(x));
         }
 
         public UriAddress Url { get; set; }
@@ -20,9 +28,15 @@
 
         public int Position { get; set; }
 
+        public bool Enabled { get; set; }
+
         public Playlist Playlist { get; set; }
 
+        public MediaType MediaType { get; set; }
+
         public ICollection<Label> Labels { get; private set; }
+
+        public Tvg Tvg { get; set; }
 
         #region Interfaces implementations
 
@@ -44,13 +58,13 @@
         }
 
         public static bool operator ==(Media m1, Media m2) => m1.Equals(m2);
-        public static bool operator !=  (Media m1, Media m2) => !m1.Equals(m2);
+        public static bool operator !=(Media m1, Media m2) => !m1.Equals(m2);
         public static bool operator >(Media m1, Media m2) => m1.Position > m2.Position;
         public static bool operator >=(Media m1, Media m2) => m1.Position >= m2.Position;
         public static bool operator <(Media m1, Media m2) => m1.Position < m2.Position;
         public static bool operator <=(Media m1, Media m2) => m1.Position <= m2.Position;
 
-        public virtual bool Equals(Media other) => Url.Equals(other.Url); //&& DisplayName.Equals(other.DisplayName);
+        public virtual bool Equals(Media other) => Url.Equals(other?.Url); //&& DisplayName.Equals(other.DisplayName);
 
         public override bool Equals(object obj)
         {
@@ -59,7 +73,7 @@
             return m.Url == Url; //&& m.DisplayName == DisplayName;
         }
 
-        public override int GetHashCode() => Url.GetHashCode();
+        public override int GetHashCode() => Url?.GetHashCode() ?? 0;
 
         public override string ToString() => $"{Position} {DisplayName}";
 
@@ -94,7 +108,7 @@
 
         /// <summary>
         /// Add only knowned attributes
-        /// avoid duplicated
+        /// avoid duplicated label
         /// avoid null key 
         /// </summary>
         public void AddNewLabel(Label label)
@@ -111,5 +125,28 @@
 
             Labels.Add(label);
         }
+
+        public string Format(IMediaFormatterVisitor mediaFormatter) => mediaFormatter.Visit(this);
+
+        public static class KnowedLabelKeys
+        {
+            public const string GroupKey = "media_group";
+            public const string Lang = "media_lang";
+        }
+    }
+
+    public enum MediaType : Byte
+    {
+        LiveTv = 0,
+        Radio,
+        /// <summary>
+        /// video file
+        /// </summary>
+        Video,
+        /// <summary>
+        /// audio file
+        /// </summary>
+        Audio,
+        Other
     }
 }

@@ -19,6 +19,7 @@ using Synker.Infrastructure;
 using Synker.Persistence;
 using System;
 using System.Reflection;
+using Xtream.Client;
 
 namespace Synker.Api
 {
@@ -45,11 +46,15 @@ namespace Synker.Api
             //Some problems with the SynkerDBContext migration
             services.AddBeatPulseUI();
 
-            services.AddMediatR(typeof(GetDataSourceQueryHandler).GetTypeInfo().Assembly);
+            services.AddMediatR(typeof(GetDataSourceQuery).GetTypeInfo().Assembly);
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
 
             services.AddTransient<INotificationService, NotificationService>();
 
+            services.AddTransient<IDataSourceReaderFactory, DefaultDataSourceReaderFactory>();
+            services.AddTransient<IXtreamClient, XtreamClient>();
+            services.AddTransient<IHttpClientFactory, DefaultHttpClientFactory>();
+            
             services.AddDbContext<ISynkerDbContext, SynkerDbContext>(options =>
             {
                 options.UseNpgsql(Configuration.GetConnectionString("PlDatabase"),

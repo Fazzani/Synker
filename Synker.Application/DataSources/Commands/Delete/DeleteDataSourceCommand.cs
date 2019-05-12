@@ -14,12 +14,10 @@ namespace Synker.Application.DataSources.Commands.Delete
         public class Handler : IRequestHandler<DeleteDataSourceCommand, Unit>
         {
             private readonly ISynkerDbContext _context;
-            private readonly IMediator _mediator;
 
-            public Handler(ISynkerDbContext context, IMediator mediator)
+            public Handler(ISynkerDbContext context)
             {
                 _context = context;
-                _mediator = mediator;
             }
 
             public async Task<Unit> Handle(DeleteDataSourceCommand request, CancellationToken cancellationToken)
@@ -28,7 +26,7 @@ namespace Synker.Application.DataSources.Commands.Delete
 
                 if (entity == null)
                 {
-                    throw new NotFoundException(nameof(PlaylistDataSource), entity.Id);
+                    throw new NotFoundException(nameof(PlaylistDataSource), request.Id);
                 }
 
                 _context.PlaylistDataSources.Remove(entity);
