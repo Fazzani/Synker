@@ -22,11 +22,11 @@ steps:
     containerRegistry: docker
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 
-- task: Docker@0
+- task: Docker@2
   displayName: 'Build Synker Api image'
   inputs:
     containerRegistry: docker
-    #buildContext: '$(Build.SourcesDirectory)'
+    buildContext: '$(Build.SourcesDirectory)'
     repository: 'synker/synker_api'
     tags: |
       $(GitVersion.SemVer)
