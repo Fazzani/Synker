@@ -147,11 +147,16 @@ namespace Synker.Persistence
         }
     }
 
-    public static class Data
+    internal static class Data
     {
-        public static Dictionary<int, User> Users = new Dictionary<int, User>();
-        public static Dictionary<int, PlaylistDataSource> DataSources = new Dictionary<int, PlaylistDataSource>();
-        public static Dictionary<int, Playlist> Playlists = new Dictionary<int, Playlist>();
-        public static Dictionary<int, Media> Medias = new Dictionary<int, Media>();
+        private static Dictionary<int, User> users = new Dictionary<int, User>();
+        private static Dictionary<int, PlaylistDataSource> dataSources = new Dictionary<int, PlaylistDataSource>();
+        private static Dictionary<int, Playlist> playlists = new Dictionary<int, Playlist>();
+        private static Dictionary<int, Media> medias = new Dictionary<int, Media>();
+
+        internal static Dictionary<int, User> Users { get => users; set => users = value; }
+        internal static Dictionary<int, PlaylistDataSource> DataSources { get => dataSources; set => dataSources = value; }
+        internal static Dictionary<int, Playlist> Playlists { get => playlists; set => playlists = value; }
+        internal static Dictionary<int, Media> Medias { get => medias; set => medias = value; }
     }
 }
