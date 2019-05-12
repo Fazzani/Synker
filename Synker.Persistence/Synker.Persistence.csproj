@@ -2,13 +2,25 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <IsTestProject>true</IsTestProject>
+    <IsPackable>false</IsPackable>
     <LangVersion>7.1</LangVersion>
   </PropertyGroup>
-  
+
   <PropertyGroup>
-    <IsTestProject>false</IsTestProject>
+    <Company>Synker</Company>
+    <Authors>Heni FAZZANI</Authors>
+    <PackageId>Synker.Persistence</PackageId>
+    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    
   </PropertyGroup>
 
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+  
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0" />
@@ -21,6 +33,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Synker.Application\Synker.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>
