@@ -27,7 +27,7 @@ steps:
   inputs:
     containerRegistry: docker
     buildContext: '$(Build.SourcesDirectory)'
-    repository: 'synker/synker_api
+    repository: 'synker/synker_api'
     tags: |
       $(GitVersion.SemVer)
       latest
@@ -37,7 +37,7 @@ steps:
   inputs:
     containerRegistry: docker
     command: 'Push'
-    repository: 'synker/synker_api
+    repository: 'synker/synker_api'
     tags: |
       $(GitVersion.SemVer)
       latest
