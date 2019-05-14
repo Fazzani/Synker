@@ -4,6 +4,6 @@
     public interface IFormatterVisitor
     {
         string Visit(Media media);
-        string Visit(Playlist media);
+        string Visit(Playlist playlist);
     }
 }

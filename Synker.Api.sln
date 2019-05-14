@@ -44,9 +44,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synker.Application.Tests", "Synker.Application.Tests\Synker.Application.Tests.csproj", "{5531D94B-C281-46E1-BA5A-65F5973375C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synker.Common", "Synker.Common\Synker.Common.csproj", "{85CC4052-A5BB-47F1-BADC-BF02B36C30FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synker.Common", "Synker.Common\Synker.Common.csproj", "{85CC4052-A5BB-47F1-BADC-BF02B36C30FC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synker.Api.FunctionalTests", "Synker.Api.FunctionalTests\Synker.Api.FunctionalTests.csproj", "{BF745107-24CF-4697-89C3-70470DC8C56E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synker.Api.Functional.Tests", "Synker.Api.FunctionalTests\Synker.Api.Functional.Tests.csproj", "{BF745107-24CF-4697-89C3-70470DC8C56E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
