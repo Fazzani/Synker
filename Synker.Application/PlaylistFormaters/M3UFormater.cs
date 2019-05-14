@@ -27,8 +27,6 @@
             return string.Empty;
         }
 
-        
-
         public string Visit(Media media) =>
          $"#EXTINF:{(Byte)media.MediaType} tvg-id=\"{media.Tvg?.Id}\" tvg-logo=\"{media.Tvg?.Logo}\" tvg-name=\"{media.Tvg?.Name}\" audio-track=\"{media.Tvg?.Audio_track}\" tvg-shift=\"{media.Tvg?.Shift}\" aspect-ratio=\"{media.Tvg?.Aspect_ratio}\" group-title=\"{media.Group}\", {media.DisplayName.Trim()}{ Environment.NewLine}{media.Url}{ Environment.NewLine}";
     }

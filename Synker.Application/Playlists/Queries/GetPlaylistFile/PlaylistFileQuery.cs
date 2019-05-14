@@ -15,7 +15,7 @@
     {
         public long Id { get; set; }
 
-        public string FileFormat { get; set; }
+        public string FileFormat { get; set; } = "m3u";
 
         public class PlaylistFileQueryQueryHandler : IRequestHandler<PlaylistFileQuery, string>
         {

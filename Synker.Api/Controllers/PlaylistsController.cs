@@ -51,7 +51,7 @@ namespace Synker.Api.Controllers
         [HttpPost("{id}/medias", Name = "GetPlaylistWithMedias")]
         [ProducesResponseType(typeof(PagedResult<PlaylistMediasViewModel>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetWithMedias([FromRoute][Required]long id, [FromBody] PlaylistFileQuery query, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> GetWithMedias([FromRoute][Required]long id, [FromBody] PlaylistMediasQuery query, CancellationToken cancellationToken = default)
         {
             query.Id = id;
             return Ok(await Mediator.Send(query, cancellationToken));
