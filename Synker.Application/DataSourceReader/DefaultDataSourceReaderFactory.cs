@@ -15,7 +15,7 @@ namespace Synker.Application.Interfaces
 
         public IDataSourceReader Create(PlaylistDataSource playlistDataSource)
         {
-            if (playlistDataSource is M3uPlaylistDataSource uPlaylistDataSource)
+            if (playlistDataSource is M3UPlaylistDataSource uPlaylistDataSource)
             {
                 return new M3UDataSourceReader(uPlaylistDataSource);
             }

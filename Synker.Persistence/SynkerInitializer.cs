@@ -66,7 +66,7 @@ namespace Synker.Persistence
         private void SeedDataSources(SynkerDbContext context)
         {
 
-            Data.DataSources.TryAdd(0, new M3uPlaylistDataSource
+            Data.DataSources.TryAdd(0, new M3UPlaylistDataSource
             {
                 User = Data.Users[2],
                 Name = "dsm3u_2",
@@ -75,7 +75,7 @@ namespace Synker.Persistence
                 CreatedDate = DateTime.UtcNow.AddMonths(-5)
             });
 
-            Data.DataSources.TryAdd(1, new M3uPlaylistDataSource
+            Data.DataSources.TryAdd(1, new M3UPlaylistDataSource
             {
                 User = Data.Users[1],
                 Name = "dsm3u",
@@ -105,7 +105,7 @@ namespace Synker.Persistence
             {
                 var id = i % Data.Users.Keys.Count;
 
-                Data.DataSources.TryAdd(i, new M3uPlaylistDataSource
+                Data.DataSources.TryAdd(i, new M3UPlaylistDataSource
                 {
                     User = Data.Users[id],
                     Name = $"ds_{DateTime.Now}_{i}",

@@ -1,8 +1,9 @@
 ﻿namespace Synker.Domain.Infrastructure
 {
     using Synker.Domain.Entities;
-    public interface IMediaFormatterVisitor
+    public interface IFormatterVisitor
     {
         string Visit(Media media);
+        string Visit(Playlist media);
     }
 }

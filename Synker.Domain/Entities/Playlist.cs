@@ -3,6 +3,7 @@
     using Synker.Domain.Entities.Core;
     using Synker.Domain.Exceptions;
     using Synker.Domain.Infrastructure;
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;

@@ -13,11 +13,11 @@
 
     public class M3UDataSourceReader : IDataSourceReader
     {
-        private readonly M3uPlaylistDataSource _dataSource;
+        private readonly M3UPlaylistDataSource _dataSource;
         public const string HeaderFile = "#EXTM3U";
         public const string HeaderUrl = "#EXTINF:";
 
-        public M3UDataSourceReader(M3uPlaylistDataSource dataSource)
+        public M3UDataSourceReader(M3UPlaylistDataSource dataSource)
         {
             _dataSource = dataSource;
         }
@@ -45,8 +45,10 @@
             using (var stringReader = new StringReader(await streamReader.ReadToEndAsync()))
             {
                 var line = stringReader.ReadLine();
+
                 if (string.IsNullOrEmpty(line))
                     return listChannels;
+
                 var i = 1;
                 //var isM3u = line.Equals(HeaderFile, StringComparison.OrdinalIgnoreCase);
                 while ((line = await stringReader.ReadLineAsync()) != null)
@@ -55,12 +57,12 @@
 
                     if (line != string.Empty && line.StartsWith(HeaderUrl))
                     {
-                        var tab1 = line.Split(',');
+                        var channelProperties = line.Split(',');
                         //var tab2 = tab1[0].Split(' ');
                         //var live = tab2.FirstOrDefault().Equals(HeaderUrl + "0") || tab2.FirstOrDefault().Equals(HeaderUrl + "-1");
                         var channel = new Media
                         {
-                            DisplayName = tab1.Last().Trim(),
+                            DisplayName = channelProperties.Last().Trim(),
                             Position = i++,
                             //IsLive = live,
                             //OriginalHeaderLine = line
@@ -71,7 +73,7 @@
                             channel.Url = UriAddress.For(await stringReader.ReadLineAsync());
                         } while (string.IsNullOrWhiteSpace(channel.Url.Url));
                         // channel.StreamId = channel.StreamId;
-                        GetTvg(tab1, channel);
+                        GetTvg(channelProperties, channel);
                         listChannels.Add(channel);
                     }
 
@@ -80,24 +82,28 @@
             return listChannels;
         }
 
-        private static void GetTvg(string[] tab1, Media channel)
+        private static void GetTvg(string[] channelProperties, Media channel)
         {
             channel.Tvg = new Tvg();
 
-            foreach (var item in tab1[0].Split(' '))
+            foreach (var item in channelProperties[0].Split(' ').Select(x => x.Trim()))
             {
                 var tabTags = item.Split('=');
                 if (tabTags.Length > 1)
                 {
                     var value = tabTags[1].Replace("\"", "");
 
-                    channel.Tvg.Id = item.Trim().StartsWith("tvg-id") ? value : channel.Tvg.Id;
-                    channel.Tvg.Logo = item.Trim().StartsWith("tvg-logo") ? value : channel.Tvg.Logo;
-                    channel.Tvg.Name = item.Trim().StartsWith("tvg-name") ? value : channel.Tvg.Name;
+                    channel.Tvg.Id = item.StartsWith("tvg-id") ? value : channel.Tvg.Id;
+                    channel.Tvg.Logo = item.StartsWith("tvg-logo") ? value : channel.Tvg.Logo;
+                    channel.Tvg.Name = item.StartsWith("tvg-name") ? value : channel.Tvg.Name;
 
-                    if (item.Trim().StartsWith("group-title"))
+                    if (item.StartsWith("group-title"))
                     {
-                        channel.Labels.Add(new Label { Key = Media.KnowedLabelKeys.GroupKey, Value = value });
+                        channel.Labels.Add(new Label
+                        {
+                            Key = Media.KnowedLabelKeys.GroupKey,
+                            Value = value
+                        });
                     }
                 }
             }

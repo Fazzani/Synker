@@ -2,9 +2,9 @@
 {
     using Synker.Domain.Entities.Core;
 
-    public class M3uPlaylistDataSource : PlaylistDataSource
+    public class M3UPlaylistDataSource : PlaylistDataSource
     {
-        public M3uPlaylistDataSource()
+        public M3UPlaylistDataSource()
         {
             PlaylistDataSourceFormat = PlaylistDataSourceFormatEnum.M3u;
         }

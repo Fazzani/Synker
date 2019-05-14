@@ -1,15 +1,23 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Synker.Api.Infrastructure;
 using Synker.Application.Infrastructure.PagedResult;
 using Synker.Application.Playlists.Commands;
 using Synker.Application.Playlists.Queries;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Synker.Api.Controllers
 {
+    /// <summary>
+    /// TODO: 
+    /// - Getting playlist with different formats (m3u, tvlist, json) // cache
+    /// - Gestion auth and user
+    /// </summary>
     public class PlaylistsController : BaseController
     {
         /// <summary>
@@ -43,7 +51,7 @@ namespace Synker.Api.Controllers
         [HttpPost("{id}/medias", Name = "GetPlaylistWithMedias")]
         [ProducesResponseType(typeof(PagedResult<PlaylistMediasViewModel>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetWithMedias([FromRoute][Required]long id, [FromBody] PlaylistMediasQuery query, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> GetWithMedias([FromRoute][Required]long id, [FromBody] PlaylistFileQuery query, CancellationToken cancellationToken = default)
         {
             query.Id = id;
             return Ok(await Mediator.Send(query, cancellationToken));
@@ -76,8 +84,37 @@ namespace Synker.Api.Controllers
         public async Task<IActionResult> Delete(long id)
         {
             await Mediator.Send(new DeletePlaylistCommand { Id = id });
-
             return NoContent();
+        }
+
+        /// <summary>
+        /// Get playlist file
+        /// </summary>
+        /// <param name="id">playlist id</param>
+        /// <param name="format">output file format</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet("{id}/format", Name = nameof(GetFormat))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(byte[]), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetFormat([FromRoute][Required]long id, [FromQuery] string format = "m3u",
+            CancellationToken cancellationToken = default)
+        {
+            var result = await Mediator.Send(new PlaylistFileQuery { Id = id, FileFormat = format }, cancellationToken);
+
+            if(string.IsNullOrEmpty(result))
+            {
+                return NoContent();
+            }
+
+            using (var playlistStream = new MemoryStream())
+            using (var sw = new StreamWriter(playlistStream, Encoding.UTF8, 4096, true))
+            {
+                sw.Write(result);
+                return File(playlistStream.ToArray(), "text/plain");
+            }
         }
     }
 }

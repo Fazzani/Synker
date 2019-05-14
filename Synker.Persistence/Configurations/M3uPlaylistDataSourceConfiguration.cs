@@ -5,9 +5,9 @@
     using System.Diagnostics.CodeAnalysis;
 
     [ExcludeFromCodeCoverage]
-    public class M3uPlaylistDataSourceConfiguration : PlaylistDataSourceConfiguration<M3uPlaylistDataSource>
+    public class M3uPlaylistDataSourceConfiguration : PlaylistDataSourceConfiguration<M3UPlaylistDataSource>
     {
-        public override void Configure(EntityTypeBuilder<M3uPlaylistDataSource> builder)
+        public override void Configure(EntityTypeBuilder<M3UPlaylistDataSource> builder)
         {
             builder.OwnsOne(x => x.Uri, uri => {
                 uri.Property(x => x.Url).IsRequired();

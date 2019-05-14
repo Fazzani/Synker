@@ -31,6 +31,7 @@
             v => JsonConvert.DeserializeObject<List<Label>>(v));
 
             builder.HasIndex(x => x.DisplayName);
+            builder.Ignore(x => x.Group);
         }
     }
 }

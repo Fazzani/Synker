@@ -36,6 +36,8 @@
 
         public ICollection<Label> Labels { get; private set; }
 
+        public string Group => Labels.FirstOrDefault(x => x.Key == KnowedLabelKeys.GroupKey)?.Value;
+
         public Tvg Tvg { get; set; }
 
         #region Interfaces implementations
@@ -85,8 +87,6 @@
                 yield return new ValidationResult("Media url is required");
         }
 
-        //public virtual string Format(IMediaFormatterVisitor mediaFormatter) => mediaFormatter.Visit(this);
-
         public bool Equals(Media x, Media y)
         {
             if (x == null && y == null)
@@ -126,7 +126,7 @@
             Labels.Add(label);
         }
 
-        public string Format(IMediaFormatterVisitor mediaFormatter) => mediaFormatter.Visit(this);
+        public string Format(IFormatterVisitor mediaFormatter) => mediaFormatter.Visit(this);
 
         public static class KnowedLabelKeys
         {

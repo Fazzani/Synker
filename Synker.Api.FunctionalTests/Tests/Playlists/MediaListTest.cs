@@ -25,7 +25,7 @@ namespace Synker.Api.FunctionalTests.Tests.Playlists
         [Fact, Order(0)]
         public async Task MediaList_Playlist_Not_Found()
         {
-            var httpResponse = await _client.PostAsJsonAsync("/api/1.0/playlists/1111/medias", new PlaylistMediasQuery { Id = 1 });
+            var httpResponse = await _client.PostAsJsonAsync("/api/1.0/playlists/1111/medias", new PlaylistFileQuery { Id = 1 });
             httpResponse.StatusCode.ShouldBe(HttpStatusCode.NotFound);
         }
 
@@ -33,7 +33,7 @@ namespace Synker.Api.FunctionalTests.Tests.Playlists
         public async Task MediaList_Playlist_Ok()
         {
             var id = Data.Playlists[4].Id;
-            var httpResponse = await _client.PostAsJsonAsync($"/api/1.0/playlists/{id}/medias", new PlaylistMediasQuery { Id = id });
+            var httpResponse = await _client.PostAsJsonAsync($"/api/1.0/playlists/{id}/medias", new PlaylistFileQuery { Id = id });
             httpResponse.EnsureSuccessStatusCode();
             httpResponse.StatusCode.ShouldBe(HttpStatusCode.OK);
 

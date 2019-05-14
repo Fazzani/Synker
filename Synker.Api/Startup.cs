@@ -15,6 +15,7 @@ using Synker.Application.DataSources.Queries.GetDatasource;
 using Synker.Application.Infrastructure.AutoMapper;
 using Synker.Application.Infrastructure.FluentValidationBehaviors;
 using Synker.Application.Interfaces;
+using Synker.Application.PlaylistFormaters;
 using Synker.Infrastructure;
 using Synker.Persistence;
 using System;
@@ -53,9 +54,10 @@ namespace Synker.Api
             services.AddTransient<INotificationService, NotificationService>();
 
             services.AddTransient<IDataSourceReaderFactory, DefaultDataSourceReaderFactory>();
+            services.AddTransient<IFormatterFactory, DefaultFormatterFactory>();
             services.AddTransient<IXtreamClient, XtreamClient>();
             services.AddTransient<IHttpClientFactory, DefaultHttpClientFactory>();
-            
+
             services.AddDbContext<ISynkerDbContext, SynkerDbContext>(options =>
             {
                 options.UseNpgsql(Configuration.GetConnectionString("PlDatabase"),
@@ -63,8 +65,7 @@ namespace Synker.Api
                 {
                     sqlOptions.MigrationsAssembly(typeof(SynkerDbContext).GetTypeInfo().Assembly.GetName().Name);
                     //Configuring Connection Resiliency:
-                    sqlOptions.
-                    EnableRetryOnFailure(3, TimeSpan.FromSeconds(30), null);
+                    sqlOptions.EnableRetryOnFailure(3, TimeSpan.FromSeconds(30), null);
                 });
 
                 //// Changing default behavior when client evaluation occurs to throw.
