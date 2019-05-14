@@ -51,6 +51,9 @@ namespace Synker.Application.Playlists.Commands
                 _context.Playlists.Add(entity);
                 await _context.SaveChangesAsync(cancellationToken);
 
+                await _context.Medias.AddRangeAsync(entity.Medias);
+                await _context.SaveChangesAsync(cancellationToken);
+
                 await _mediator.Publish(new PlaylistCreated { PlaylistId = entity.Id }, cancellationToken);
 
                 return entity.Id;

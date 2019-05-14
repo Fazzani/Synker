@@ -79,6 +79,7 @@
                 }
             }
 
+            media.Playlist = this;
             Medias.Add(media);
             return true;
         }

@@ -12,6 +12,8 @@
 
         DbSet<User> Users { get; set; }
 
+        DbSet<Media> Medias { get; set; }
+
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

@@ -47,7 +47,7 @@ namespace Synker.Api
             services.AddAutoMapper(new Assembly[] { typeof(AutoMapperProfile).GetTypeInfo().Assembly });
 
             //Some problems with the SynkerDBContext migration
-            services.AddBeatPulseUI();
+            //services.AddBeatPulseUI();
 
             services.AddMediatR(typeof(GetDataSourceQuery).GetTypeInfo().Assembly);
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
