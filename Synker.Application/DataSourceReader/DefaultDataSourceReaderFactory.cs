@@ -1,9 +1,10 @@
-﻿using Synker.Application.DataSourceReader;
-using Synker.Domain.Entities;
-using Xtream.Client;
-
-namespace Synker.Application.Interfaces
+﻿namespace Synker.Application.DataSourceReader
 {
+    using Synker.Application.DataSourceReader;
+    using Synker.Application.Interfaces;
+    using Synker.Domain.Entities;
+    using Xtream.Client;
+
     public class DefaultDataSourceReaderFactory : IDataSourceReaderFactory
     {
         private readonly IXtreamClient _xtreamClient;
@@ -20,9 +21,11 @@ namespace Synker.Application.Interfaces
                 return new M3UDataSourceReader(uPlaylistDataSource);
             }
             else
-             if (playlistDataSource is XtreamPlaylistDataSource xtreamDataSource)
             {
-                return new XtreamDataSourceReader(xtreamDataSource, _xtreamClient);
+                if (playlistDataSource is XtreamPlaylistDataSource xtreamDataSource)
+                {
+                    return new XtreamDataSourceReader(xtreamDataSource, _xtreamClient);
+                }
             }
             return null;
         }

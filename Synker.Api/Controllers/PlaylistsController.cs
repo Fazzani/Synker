@@ -15,7 +15,7 @@ namespace Synker.Api.Controllers
 {
     /// <summary>
     /// TODO: 
-    /// - Getting playlist with different formats (m3u, tvlist, json) // cache
+    /// - Caching playlists
     /// - Gestion auth and user
     /// </summary>
     public class PlaylistsController : BaseController

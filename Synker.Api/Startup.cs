@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NSwag;
 using Synker.Api.Filters;
+using Synker.Application.DataSourceReader;
 using Synker.Application.DataSources.Commands.Create;
 using Synker.Application.DataSources.Queries.GetDatasource;
 using Synker.Application.Infrastructure.AutoMapper;
