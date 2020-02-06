@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synker.Api", "Synker.Api\Synker.Api.csproj", "{A47B5E00-4002-4872-B0F3-FAE4F2C9446B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synker.Api", "src\Synker.Api\Synker.Api.csproj", "{A47B5E00-4002-4872-B0F3-FAE4F2C9446B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synker.Domain", "Synker.Domain\Synker.Domain.csproj", "{967E4E4C-C351-48A6-9E48-0C9AB1054622}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synker.Domain", "src\Synker.Domain\Synker.Domain.csproj", "{967E4E4C-C351-48A6-9E48-0C9AB1054622}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synker.Application", "Synker.Application\Synker.Application.csproj", "{13A8D734-E1EF-4EE3-9969-25E88C9491D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synker.Application", "src\Synker.Application\Synker.Application.csproj", "{13A8D734-E1EF-4EE3-9969-25E88C9491D2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{4BDEB2A4-8751-4710-91D4-7B1067B79AE0}"
 	ProjectSection(SolutionItems) = preProject
@@ -27,11 +27,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{752E94DB-167E-4B0B-ADB7-6EFA4DAC3B08}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synker.Persistence", "Synker.Persistence\Synker.Persistence.csproj", "{51807197-3A3E-4713-A458-AA7FEE90C7F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synker.Persistence", "src\Synker.Persistence\Synker.Persistence.csproj", "{51807197-3A3E-4713-A458-AA7FEE90C7F8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synker.Infrastructure", "Synker.Infrastructure\Synker.Infrastructure.csproj", "{5FDCA489-2A7C-43A2-A1E5-637DB5C2F985}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synker.Infrastructure", "src\Synker.Infrastructure\Synker.Infrastructure.csproj", "{5FDCA489-2A7C-43A2-A1E5-637DB5C2F985}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synker.Domain.Tests", "Synker.Domain.Tests\Synker.Domain.Tests.csproj", "{F731AD9B-D7C8-458C-9990-D9A5126049ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synker.Domain.Tests", "tests\Synker.Domain.Tests\Synker.Domain.Tests.csproj", "{F731AD9B-D7C8-458C-9990-D9A5126049ED}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{21949F1B-8569-4639-ADC7-95A90077AC51}"
 	ProjectSection(SolutionItems) = preProject
@@ -42,11 +42,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		GitVersion.yml = GitVersion.yml
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synker.Application.Tests", "Synker.Application.Tests\Synker.Application.Tests.csproj", "{5531D94B-C281-46E1-BA5A-65F5973375C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synker.Application.Tests", "tests\Synker.Application.Tests\Synker.Application.Tests.csproj", "{5531D94B-C281-46E1-BA5A-65F5973375C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synker.Common", "Synker.Common\Synker.Common.csproj", "{85CC4052-A5BB-47F1-BADC-BF02B36C30FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synker.Common", "src\Synker.Common\Synker.Common.csproj", "{85CC4052-A5BB-47F1-BADC-BF02B36C30FC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synker.Api.FunctionalTests", "Synker.Api.FunctionalTests\Synker.Api.FunctionalTests.csproj", "{BF745107-24CF-4697-89C3-70470DC8C56E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "tests\Synker.Api.FunctionalTests", "tests\Synker.Api.FunctionalTests\Synker.Api.FunctionalTests.csproj", "{BF745107-24CF-4697-89C3-70470DC8C56E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>Synker.Domain</AssemblyName>
+    <RootNamespace>Synker.Domain</RootNamespace>
+    <ProjectGuid>3553B3D5-C595-4C23-AFE8-9401E126C443</ProjectGuid>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <IsTestProject>false</IsTestProject>
+  </PropertyGroup>
+
+</Project>
