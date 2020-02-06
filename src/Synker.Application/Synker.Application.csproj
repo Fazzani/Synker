@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>Synker.Application</AssemblyName>
+    <RootNamespace>Synker.Application</RootNamespace>
+    <ProjectGuid>587BB6A0-04CD-4F17-B394-C2BDD49C75E1</ProjectGuid>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <IsTestProject>false</IsTestProject>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="FluentValidation" Version="8.6.1" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.6.1" />
+    <PackageReference Include="MediatR" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.1" />
+    <PackageReference Include="Xtream.Client" Version="1.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Synker.Common\Synker.Common.csproj" />
+    <ProjectReference Include="..\Synker.Domain\Synker.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

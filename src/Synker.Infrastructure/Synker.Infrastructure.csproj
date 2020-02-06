@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <ProjectGuid>A5D511EA-423A-4719-BE77-0F9F003150E6</ProjectGuid>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <IsTestProject>false</IsTestProject>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\Synker.Application\Synker.Application.csproj" />
+    <ProjectReference Include="..\Synker.Common\Synker.Common.csproj" />
+  </ItemGroup>
+
+</Project>
